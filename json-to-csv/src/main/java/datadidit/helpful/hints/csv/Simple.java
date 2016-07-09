@@ -2,6 +2,9 @@ package datadidit.helpful.hints.csv;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"firstName", "lastName", "dob"})
 public class Simple {
 	private String firstName; 
 	

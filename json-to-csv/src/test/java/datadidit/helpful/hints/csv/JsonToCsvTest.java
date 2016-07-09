@@ -1,8 +1,10 @@
 package datadidit.helpful.hints.csv;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,24 +17,22 @@ public class JsonToCsvTest {
 	
 	private CsvMapper csvMapper; 
 	
-	@Before
+	@BeforeEach
 	public void setup(){
 		csvMapper = new CsvMapper();
 		mapper = new ObjectMapper();
 	}
 	@Test
 	public void CreateJson() throws JsonProcessingException{
-		csvMapper = new CsvMapper();
-		mapper = new ObjectMapper();
+		List<Simple> simpleList = new ArrayList<>();
+		simpleList.add(new Simple("hello", "world", new Date()));
 		
-		Simple simple = new Simple("hello", "world", new Date());
-		
-		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(simple);
+		String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(simpleList);
 	
 		System.out.println(json); 
 		
 		System.out.println("Now as CSV: ");
 		CsvSchema schema = csvMapper.schemaFor(Simple.class).withHeader();
-		System.out.println(csvMapper.writer(schema).writeValueAsString(simple));
+		System.out.println(csvMapper.writer(schema).writeValueAsString(simpleList));
 	}
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+<bean id="camelTracer" class="org.apache.camel.processor.interceptor.Tracer">
+    <property name="traceExceptions" value="false"/>
+    <property name="traceInterceptors" value="true"/>
+    <property name="logLevel" value="ERROR"/>
+    <property name="logName" value="com.mycompany.messages"/>
+</bean>
+
+  <camelContext trace="true" xmlns="http://camel.apache.org/schema/spring">
+  	<template id="myTemplate" defaultEndpoint="direct:handleJson"/>
+    <!-- 
+    	Simple Hello world route to get things setup
+     -->
+    <route id="hello-camel">
+    	<from uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/input" />
+    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/output" />
+    </route>
+    
+    <!-- 
+    	Route that takes in a CSV file and outputs JSON
+     -->
+    <route id="csv-to-json">
+    	<from uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/process-csv?delete=true" />
+    	<process ref="csvToJson" />
+    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/process-complete" />
+    </route>
+    
+    <route id="handleJson">
+    	<from uri="direct:handleJson" />
+    	<log message="Got ${body}" />
+    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/output-json" />
+    </route>
+    
+    <!--
+    <route>
+      <from uri="timer://myTimer?fixedRate=true&amp;period=2000"/>
+      <bean ref="myTransform" method="transform"/>
+      <to uri="log:ExampleRouter"/>
+    </route>
+    -->
+  </camelContext>
+  
+  <bean id="csvToJson" class="datadidit.helpful.hints.camel.CSVToJson" >
+  	<property name="producer" ref="myTemplate" />
+  	<constructor-arg type="java.lang.Boolean" value="true"/>
+  	<constructor-arg type="java.lang.String" value="" />
+  </bean>
+
+  <!--
+  <bean id="myTransform" class="org.apache.camel.example.osgi.MyTransform">
+    <property name="prefix" value="SpringDSL"/>
+  </bean>
+  -->
+</beans>

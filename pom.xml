@@ -10,13 +10,30 @@
   <modules>
     <module>json-to-csv</module>
     <module>jetty-jersey</module>
+    <module>camel-csv-json</module>
   </modules>
   <properties>
   		<jetty.version>9.2.10.v20150310</jetty.version>
 		<jersey1.version>1.19</jersey1.version>
+		<camel.version>2.17.2</camel.version>
   </properties>
   <dependencyManagement>
   	<dependencies>
+  		<dependency>
+  			<groupId>org.apache.camel</groupId>
+  			<artifactId>camel-core</artifactId>
+  			<version>${camel.version}</version>
+  		</dependency>
+ 		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+  			<version>${camel.version}</version>		
+		</dependency> 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        	<version>1.17.2</version>
+        </dependency>				
  		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>

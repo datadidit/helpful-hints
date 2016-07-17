@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
+import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,13 +52,15 @@ public class CSVToJson implements Processor{
 		InputStream stream = arg0.getIn().getBody(InputStream.class);
 		List<Map<?, ?>> objects = readObjectsFromCsv(stream);
 	
-		//Create JSON 
-		final String json = writeAsJson(objects);
-		producer.send(new Processor(){
-			public void process(Exchange outExchange){
-				outExchange.getIn().setBody(json);
-			}
-		});
+		for(Map<?,?> map : objects){
+			//Create JSON 
+			final String json = writeAsJson(map);
+			producer.send(new Processor(){
+				public void process(Exchange outExchange){
+					outExchange.getIn().setBody(json);
+				}
+			});			
+		}
 		
 		//TODO:If you don't close the stream this processor will continue to try and process the exchange...
 		stream.close();
@@ -65,12 +68,18 @@ public class CSVToJson implements Processor{
 	
     public List<Map<?, ?>> readObjectsFromCsv(InputStream file) throws IOException {
         CsvMapper csvMapper = new CsvMapper();
-        MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(schema).readValues(file);
+        String json = IOUtils.toString(file, "UTF-8");
+        MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(schema).readValues(json);
 
         return mappingIterator.readAll();
     }
     
     public String writeAsJson(List<Map<?, ?>> data) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(data);
+    }
+    
+    public String writeAsJson(Map<?, ?> data) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(data);
     }

@@ -25,11 +25,11 @@
 <bean id="camelTracer" class="org.apache.camel.processor.interceptor.Tracer">
     <property name="traceExceptions" value="false"/>
     <property name="traceInterceptors" value="true"/>
-    <property name="logLevel" value="ERROR"/>
+    <property name="logLevel" value="INFO"/>
     <property name="logName" value="com.mycompany.messages"/>
 </bean>
 
-  <camelContext trace="true" xmlns="http://camel.apache.org/schema/spring">
+  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
   	<template id="myTemplate" defaultEndpoint="direct:handleJson"/>
     <!-- 
     	Simple Hello world route to get things setup
@@ -51,27 +51,19 @@
     <route id="handleJson">
     	<from uri="direct:handleJson" />
     	<log message="Got ${body}" />
-    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/output-json" />
+    	<to uri="mongodb:mongoBean?database=test&amp;collection=testCollection&amp;operation=insert" />
+    	<!--<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/output-json" />-->
     </route>
-    
-    <!--
-    <route>
-      <from uri="timer://myTimer?fixedRate=true&amp;period=2000"/>
-      <bean ref="myTransform" method="transform"/>
-      <to uri="log:ExampleRouter"/>
-    </route>
-    -->
   </camelContext>
+  
+  <bean id="mongoBean" class="com.mongodb.Mongo">
+  	<constructor-arg name="host" value="127.0.0.1" />
+    <constructor-arg name="port" value="27017" />
+  </bean>
   
   <bean id="csvToJson" class="datadidit.helpful.hints.camel.CSVToJson" >
   	<property name="producer" ref="myTemplate" />
   	<constructor-arg type="java.lang.Boolean" value="true"/>
   	<constructor-arg type="java.lang.String" value="" />
   </bean>
-
-  <!--
-  <bean id="myTransform" class="org.apache.camel.example.osgi.MyTransform">
-    <property name="prefix" value="SpringDSL"/>
-  </bean>
-  -->
 </beans>

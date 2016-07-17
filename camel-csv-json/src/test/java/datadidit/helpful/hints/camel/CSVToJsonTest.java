@@ -24,4 +24,11 @@ public class CSVToJsonTest {
         List<Map<?, ?>> data = converter.readObjectsFromCsv(new FileInputStream(new File("src/test/resources/NoHeader.json")));
 		System.out.println(converter.writeAsJson(data));
 	}
+	
+	@Test
+	public void ConvertCSVToJsonTestBaseball() throws Exception{
+        converter = new CSVToJson(true, null);
+		List<Map<?, ?>> data = converter.readObjectsFromCsv(new FileInputStream(new File("src/test/resources/Syracuse Chiefs_team_batting")));
+		System.out.println(converter.writeAsJson(data));
+	}
 }

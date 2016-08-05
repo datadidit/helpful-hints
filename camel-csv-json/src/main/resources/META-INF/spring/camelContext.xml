@@ -22,14 +22,7 @@
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-<bean id="camelTracer" class="org.apache.camel.processor.interceptor.Tracer">
-    <property name="traceExceptions" value="false"/>
-    <property name="traceInterceptors" value="true"/>
-    <property name="logLevel" value="INFO"/>
-    <property name="logName" value="com.mycompany.messages"/>
-</bean>
-
-  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+  <camelContext xmlns="http://camel.apache.org/schema/spring">
   	<template id="myTemplate" defaultEndpoint="direct:handleJson"/>
     <!-- 
     	Simple Hello world route to get things setup
@@ -52,7 +45,6 @@
     	<from uri="direct:handleJson" />
     	<log message="Got ${body}" />
     	<to uri="mongodb:mongoBean?database=test&amp;collection=testCollection&amp;operation=insert" />
-    	<!--<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/output-json" />-->
     </route>
   </camelContext>
   

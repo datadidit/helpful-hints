@@ -25,7 +25,6 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
  * http://stackoverflow.com/questions/19766266/convert-csv-file-directly-to-json-file-using-jackson-library
  */
 public class CSVToJson implements Processor{
-	//TODO: Add logging...
 	ProducerTemplate producer; 
 	
 	private Boolean header; 

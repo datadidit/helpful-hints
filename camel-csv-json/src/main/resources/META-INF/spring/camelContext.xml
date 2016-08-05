@@ -22,14 +22,7 @@
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-<bean id="camelTracer" class="org.apache.camel.processor.interceptor.Tracer">
-    <property name="traceExceptions" value="false"/>
-    <property name="traceInterceptors" value="true"/>
-    <property name="logLevel" value="INFO"/>
-    <property name="logName" value="com.mycompany.messages"/>
-</bean>
-
-  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+  <camelContext xmlns="http://camel.apache.org/schema/spring">
   	<template id="myTemplate" defaultEndpoint="direct:handleJson"/>
     <!-- 
     	Simple Hello world route to get things setup

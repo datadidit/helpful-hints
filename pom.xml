@@ -12,14 +12,36 @@
 		<module>json-to-csv</module>
 		<module>jetty-jersey</module>
 		<module>camel-csv-json</module>
+		<module>csv-provider</module>
 	</modules>
 	<properties>
 		<jetty.version>9.2.10.v20150310</jetty.version>
 		<jersey1.version>1.19</jersey1.version>
 		<camel.version>2.17.2</camel.version>
+		<cxf.version>3.1.3</cxf.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.fasterxml.jackson.jaxrs</groupId>
+				<artifactId>jackson-jaxrs-json-provider</artifactId>
+				<version>2.8.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>javax.ws.rs-api</artifactId>
+				<version>2.0.1</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-core</artifactId>

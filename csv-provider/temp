@@ -1,0 +1,60 @@
+<servlet>
+ <servlet-name>CXFServlet</servlet-name>
+ <display-name>CXF Servlet</display-name>
+ <servlet-class>
+   org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet
+ </servlet-class>
+ <init-param>
+  <param-name>jaxrs.serviceClasses</param-name>
+  <param-value>
+    org.apache.cxf.systest.jaxrs.BookStore1,
+    org.apache.cxf.systest.jaxrs.BookStore2           
+  </param-value>
+ </init-param>
+ <init-param>
+  <param-name>jaxrs.providers</param-name>
+  <param-value>
+    org.apache.cxf.systest.jaxrs.BookStoreProvider1,
+    org.apache.cxf.systest.jaxrs.BookStoreProvider2           
+  </param-value>
+ </init-param>
+ <!-- enables schema validation -->
+ <init-param>
+  <param-name>jaxrs.schemaLocations</param-name>
+  <param-value>
+    classpath:/WEB-INF/schemas/schema1.xsd
+    classpath:/WEB-INF/schemas/schema2.xsd            
+  </param-value>
+ </init-param> 
+ <!-- registers CXF in interceptors -->
+ <init-param>
+  <param-name>jaxrs.inInterceptors</param-name>
+  <param-value>
+    org.apache.cxf.systest.jaxrs.CustomInInterceptor
+  </param-value>
+ </init-param> 
+ <!-- registers CXF out interceptors -->
+ <init-param>
+  <param-name>jaxrs.outInterceptors</param-name>
+  <param-value>
+    org.apache.cxf.systest.jaxrs.CustomOutInterceptor
+  </param-value>
+ </init-param>
+ <!-- registers extension mappings -->
+ <init-param>
+  <param-name>jaxrs.extensions</param-name>
+  <param-value>
+    xml=application/xml
+    json=application/json
+  </param-value>
+ </init-param>
+ <!-- registers contextual properties -->
+ <init-param>
+  <param-name>jaxrs.properties</param-name>
+  <param-value>
+    property1=value
+    property2=value
+  </param-value>
+ </init-param>
+<load-on-startup>1</load-on-startup>
+</servlet>

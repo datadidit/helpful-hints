@@ -23,14 +23,7 @@ import datadidit.helpful.hints.csv.test.model.SimpleSample;
 @Path("CustomProvider")
 public class CXFSampleResource {
 	@GET
-	@Path("help")
-	@Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
-	public Response sayHello(){
-		return Response.ok("HELP").build();
-	}
-	
-	@GET
-	@Produces({MediaType.APPLICATION_JSON, "application/csv"})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, "application/csv"})
 	@Path("test/{caseToUse}")
 	public List<?> doSomething(@PathParam("caseToUse") @DefaultValue("simple") String caseToUse){
 		List<Object> test = new ArrayList<>();

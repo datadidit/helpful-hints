@@ -2,10 +2,12 @@ package datadidit.helpful.hints.csv.test.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 import datadidit.helpful.hints.csv.provider.CSVTransformer;
 
+@XmlRootElement(name="ComplexSample")
 public class ComplexSample implements CSVTransformer{
 	private String studentId; 
 	
@@ -19,7 +21,7 @@ public class ComplexSample implements CSVTransformer{
 	}
 	
 	@Override
-	public Map<?, ?> toMap() {
+	public Map<?, ?> flatten() {
 		Map<String, Object> myMap = new HashMap<>();
 		myMap.put("studentId", studentId);
 		myMap.putAll(grades);

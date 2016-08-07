@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,22 +43,19 @@ public class CSVBodyWriter implements MessageBodyWriter<Object>{
 			MediaType arg4, MultivaluedMap arg5, OutputStream arg6)
 			throws IOException, WebApplicationException {
 		//Whatever makes it in here should be a list
-		if(arg0 instanceof List){
-			List<?> myList = (List<?>) arg0;
-			if(myList.isEmpty())
-				logger.log(Level.WARNING, "Nothing in list to convert to CSV....");
-			
+		List<?> myList = new ArrayList<>();
+		if(arg0 instanceof List && ((myList=(List<?>)arg0).size()>0)){			
 			CsvMapper csvMapper = new CsvMapper();
 			CsvSchema schema = null; 
 			
 			/*
-			 * If it's not a flat POJO user must implement 
+			 * If it's not a flat POJO must implement 
 			 * CSVTransformer
 			 */
 			if(implementsCSVTransformer(myList.get(0).getClass())){
 				Class[] params = {};
 				try {
-					Method meth = myList.get(0).getClass().getDeclaredMethod("toMap", params);
+					Method meth = myList.get(0).getClass().getDeclaredMethod("flatten", params);
 					
 					/*
 					 * Create a new list using the toMap() function
@@ -79,10 +77,12 @@ public class CSVBodyWriter implements MessageBodyWriter<Object>{
 					throw new IOException("Unable to retrieve toMap() "+e.getMessage());
 				} 
 			}else{
-				//TODO: Not handling empty object
 				schema = csvMapper.schemaFor(myList.get(0).getClass()).withHeader();
 				csvMapper.writer(schema).writeValue(arg6, myList);
 			}
+		}else if(myList.isEmpty()){
+			logger.log(Level.WARNING, "Nothing in list to convert to CSV....");			
+			arg6.write(myList.toString().getBytes(Charset.forName("UTF-8")));
 		}else{
 			throw new IOException("Not in proper format must pass a java.util.List to use this MessageBodyWriter...");
 		}

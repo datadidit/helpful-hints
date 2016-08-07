@@ -3,5 +3,9 @@ package datadidit.helpful.hints.csv.provider;
 import java.util.Map;
 
 public interface CSVTransformer {
-	Map<?,?> toMap();
+	/**
+	 * Utility method to Flatten POJO so that it can be converted into a CSV
+	 * @return
+	 */
+	Map<?,?> flatten();
 }

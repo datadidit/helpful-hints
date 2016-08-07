@@ -19,6 +19,7 @@
   		<init-param>
   			<param-name>jaxrs.providers</param-name>
   			<param-value>
+				com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider,  			
     			com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider,
    	 			datadidit.helpful.hints.csv.provider.CSVBodyWriter         
   			</param-value>
@@ -29,6 +30,7 @@
   			<param-value>
    			 	csv=application/csv
     			json=application/json
+    			xml=application/xml
   			</param-value>
  		</init-param> 				
 		<load-on-startup>1</load-on-startup>

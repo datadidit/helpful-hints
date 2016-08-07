@@ -1,14 +1,15 @@
 package datadidit.helpful.hints.csv.test.model;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="SimpleSample")
 public class SimpleSample {
 	private String firstName; 
 	
 	private String lastName; 
-	
+
 	private Date dob;
 	
 	public SimpleSample(){}

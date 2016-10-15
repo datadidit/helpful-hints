@@ -13,6 +13,7 @@
 		<module>camel-csv-json</module>
 		<module>csv-provider</module>
     <module>jetty-cxf</module>
+    <module>renjin-trial</module>
   </modules>
 	<properties>
 		<jetty.version>9.2.10.v20150310</jetty.version>

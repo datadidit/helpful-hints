@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>datadidit.helpful.hints</groupId>
 	<artifactId>parent</artifactId>
@@ -12,9 +13,9 @@
 		<module>jetty-jersey</module>
 		<module>camel-csv-json</module>
 		<module>csv-provider</module>
-    <module>jetty-cxf</module>
-    <module>renjin-trial</module>
-  </modules>
+		<module>jetty-cxf</module>
+		<module>renjin-trial</module>
+	</modules>
 	<properties>
 		<jetty.version>9.2.10.v20150310</jetty.version>
 		<jersey1.version>1.19</jersey1.version>
@@ -29,9 +30,9 @@
 				<version>2.8.1</version>
 			</dependency>
 			<dependency>
- 				<groupId>com.fasterxml.jackson.jaxrs</groupId> 				
-  				<artifactId>jackson-jaxrs-xml-provider</artifactId>
-				<version>2.8.1</version>			
+				<groupId>com.fasterxml.jackson.jaxrs</groupId>
+				<artifactId>jackson-jaxrs-xml-provider</artifactId>
+				<version>2.8.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
@@ -110,4 +111,17 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

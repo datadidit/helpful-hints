@@ -6,15 +6,22 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import org.renjin.sexp.AtomicVector;
 import org.renjin.sexp.DoubleArrayVector;
 import org.renjin.sexp.ListVector;
 import org.renjin.sexp.SEXP;
 import org.renjin.sexp.StringVector;
 
 import datadidit.helpful.hints.renjin.model.RModel;
+import datadidit.helpful.hints.renjin.model.RPrediction;
+import datadidit.helpful.hints.renjin.util.RenjinDataConverter;
 
 public class RenjinModelImpl {
 	private ScriptEngine engine;
+	
+	private RenjinDataConverter converter; 
+	
+	private RModel model;
 	
 	public RenjinModelImpl(){
 		//TODO: Make sure you compile with 1.8
@@ -28,26 +35,36 @@ public class RenjinModelImpl {
         if(engine == null) {
             throw new RuntimeException("Renjin Script Engine not found on the classpath.");
         }	
+        
+        converter = new RenjinDataConverter(); 
 	}
 	
-	public RModel getModel(List<Double> x, List<Double> y) throws ScriptException{
-		double[] xR;
+	public RModel createModel(List<Double> x, List<Double> y) throws ScriptException{
 		engine.put("x", this.convertListToArray(x));
 		engine.put("y", this.convertListToArray(y));
+		engine.eval("model = lm(y ~ x)");
 		
-		ListVector model = (ListVector) engine.eval("lm(x ~ y)");
+		//TODO: Summary has what I need not sure I'll be using model
+		ListVector listRepOfModel = (ListVector) engine.eval("model");
+		ListVector modelSum = (ListVector) engine.eval("summary(model)");
 		
-		RModel myRModel = new RModel(model);
-		System.out.println(model.getNames());
-		int index = 0;
-		for(SEXP p : model){
-			//Taken from AbstractSEXP
-			System.out.println(p.getNames());
-			System.out.println(p);
-			index++;
+		this.model = converter.convertListVectorToRModel(listRepOfModel, modelSum);
+		
+		return this.model;
+	}
+	
+	public RModel getModel(){
+		return this.model;
+	}
+	
+	public RPrediction getPrediction(List<Double> x) throws ScriptException{
+		if(engine.eval("model") != null){
+			engine.put("x", this.convertListToArray(x));
+			DoubleArrayVector dbVector = (DoubleArrayVector) engine.eval("predict(model, data.frame(x))");
+			return converter.createRPrediction(x, dbVector);
 		}
 		
-		return myRModel;
+		return null;
 	}
 	
 	private double[] convertListToArray(List<Double> list){

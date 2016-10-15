@@ -33,6 +33,10 @@ public class RenginModelImplTest {
 		y.add(4.0);
 		y.add(5.0);
 		
-		System.out.println(impl.getModel(x, y));
+		System.out.println(impl.createModel(x, y));
+		
+		x = new ArrayList<>(); 
+		x.add(200.0);
+		System.out.println(impl.getPrediction(x));
 	}
 }

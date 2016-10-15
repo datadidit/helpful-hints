@@ -1,9 +1,14 @@
 package datadidit.helpful.hints.renjin.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.renjin.sexp.ListVector;
 import org.renjin.sexp.Vector;
 
+@XmlRootElement(name="Model")
 public class RModel {
+	private String formula; 
+
 	private Double intercept; 
 	
 	private Double slope;
@@ -14,14 +19,6 @@ public class RModel {
 	
 	public RModel(){}
 	
-	public RModel(ListVector model){
-		Vector coefficients = model.getElementAsVector("coefficients");
-		System.out.println("Names");
-		System.out.println(model.getElementAsVector("residuals"));
-		intercept = coefficients.getElementAsDouble(0);
-		slope = coefficients.getElementAsDouble(1);
-	}
-
 	public Double getIntercept() {
 		return intercept;
 	}
@@ -42,7 +39,7 @@ public class RModel {
 		return rSquared;
 	}
 
-	public void setrSquared(Double rSquared) {
+	public void setRSquared(Double rSquared) {
 		this.rSquared = rSquared;
 	}
 
@@ -53,12 +50,19 @@ public class RModel {
 	public void setAdjustedRSquared(Double adjustedRSquared) {
 		this.adjustedRSquared = adjustedRSquared;
 	}
+	
+	public String getFormula() {
+		return formula;
+	}
+
+	public void setFormula(String formula) {
+		this.formula = formula;
+	}
 
 	@Override
 	public String toString() {
-		return "RModel [intercept=" + intercept + ", slope=" + slope + ", rSquared=" + rSquared + ", adjustedRSquared="
-				+ adjustedRSquared + "]";
+		return "RModel [formula=" + formula + ", intercept=" + intercept
+				+ ", slope=" + slope + ", rSquared=" + rSquared
+				+ ", adjustedRSquared=" + adjustedRSquared + "]";
 	}
-	
-	
 }

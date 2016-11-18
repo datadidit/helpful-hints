@@ -2,6 +2,8 @@ package datadidit.helpful.hints.camel;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.commons.io.IOUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -67,8 +70,15 @@ public class CSVToJson implements Processor{
 	
     public List<Map<?, ?>> readObjectsFromCsv(InputStream file) throws IOException {
         CsvMapper csvMapper = new CsvMapper();
-        String json = IOUtils.toString(file, "UTF-8");
-        MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(schema).readValues(json);
+        String csv = IOUtils.toString(file, "UTF-8");
+        MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(schema).readValues(csv);
+
+        return mappingIterator.readAll();
+    }
+    
+    public List<Map<?,?>> readObjectsFromCsv(String fileContent) throws JsonProcessingException, IOException{
+        CsvMapper csvMapper = new CsvMapper();
+        MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(schema).readValues(fileContent);
 
         return mappingIterator.readAll();
     }
@@ -76,6 +86,26 @@ public class CSVToJson implements Processor{
     public String writeAsJson(List<Map<?, ?>> data) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(data);
+    }
+    
+    /**
+     * Taken from: https://itexpertsconsultant.wordpress.com/2016/08/03/how-to-readwrite-csv-file-to-map-in-java/
+     * @param listOfMap
+     * @param writer
+     * @throws IOException
+     */
+    public void csvWriter(List<Map<?, ?>> listOfMap, Writer writer) throws IOException {
+        CsvSchema schema = null;
+        CsvSchema.Builder schemaBuilder = CsvSchema.builder();
+        if (listOfMap != null && !listOfMap.isEmpty()) {
+            for (Object col : listOfMap.get(0).keySet()) {
+                schemaBuilder.addColumn(col.toString());
+            }
+            schema = schemaBuilder.build().withLineSeparator("\r").withHeader();
+        }
+        CsvMapper mapper = new CsvMapper();
+        mapper.writer(schema).writeValues(writer).writeAll(listOfMap);
+        writer.flush();
     }
     
     public String writeAsJson(Map<?, ?> data) throws IOException {

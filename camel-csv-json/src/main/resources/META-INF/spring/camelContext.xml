@@ -44,7 +44,7 @@
     <route id="handleJson">
     	<from uri="direct:handleJson" />
     	<log message="Got ${body}" />
-    	<to uri="mongodb:mongoBean?database=test&amp;collection=testCollection&amp;operation=insert" />
+    	<to uri="mongodb:mongoBean?database=baseball&amp;collection=minorLeagueHitter&amp;operation=insert" />
     </route>
   </camelContext>
   

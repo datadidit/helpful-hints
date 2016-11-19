@@ -3,14 +3,17 @@ package datadidit.helpful.hints.camel;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -28,6 +31,8 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
  * http://stackoverflow.com/questions/19766266/convert-csv-file-directly-to-json-file-using-jackson-library
  */
 public class CSVToJson implements Processor{
+	private Logger logger = Logger.getLogger(CSVToJson.class.getName());
+	
 	ProducerTemplate producer; 
 	
 	private Boolean header; 
@@ -40,14 +45,35 @@ public class CSVToJson implements Processor{
 		if(!header && fieldNames!=null){
 			Builder build = CsvSchema.builder();
 			for(String field : fieldNames.split(",")){
-				build.addColumn(field);
+				build.addColumn(field, CsvSchema.ColumnType.NUMBER_OR_STRING);
 			}
 			schema = build.build();
+		}else if(header && fieldNames!=null && !fieldNames.equals("")){
+			schema = this.buildCsvSchema(fieldNames, header);
 		}else if(!header && fieldNames==null){
 			throw new Exception("File must either contain headers or you must provide them..");
 		}else{
     		schema = CsvSchema.emptySchema().withHeader();
 		}
+	}
+	
+	//TODO: Should probably do it this way at some point....
+	private CsvSchema buildCsvSchema(String fieldNames, Boolean withHeader){
+		Builder build = CsvSchema.builder();
+		for(String field : fieldNames.split(",")){
+			String[] fieldWithType = field.split("#");
+			if(fieldWithType.length==2){
+				logger.info("Field: "+fieldWithType[0]);
+				logger.info("Type: "+fieldWithType[1]);
+				build.addColumn(fieldWithType[0], CsvSchema.ColumnType.valueOf(fieldWithType[1]));
+			}else{
+				build.addColumn(field);				
+			}
+		}
+		if(withHeader){
+			return build.build().withHeader();
+		}
+		return build.build();
 	}
 	
 	public void process(Exchange arg0) throws Exception {
@@ -73,14 +99,38 @@ public class CSVToJson implements Processor{
         String csv = IOUtils.toString(file, "UTF-8");
         MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(schema).readValues(csv);
 
-        return mappingIterator.readAll();
+        return this.fixMap(mappingIterator.readAll());
     }
     
     public List<Map<?,?>> readObjectsFromCsv(String fileContent) throws JsonProcessingException, IOException{
         CsvMapper csvMapper = new CsvMapper();
         MappingIterator<Map<?, ?>> mappingIterator = csvMapper.readerFor(Map.class).with(schema).readValues(fileContent);
-
-        return mappingIterator.readAll();
+        
+        return this.fixMap(mappingIterator.readAll());
+    }
+    
+    //TODO: This is a HACK, use library or submit bug
+    public List<Map<?,?>> fixMap(List<Map<?,?>> map){
+    	List<Map<?,?>> newList = new ArrayList<>();
+    	
+     	for(Map<?, ?> entry : map){
+    		Map<String,Object> newMap = new HashMap<String,Object>();
+    		for(Map.Entry<?, ?> mEntry : entry.entrySet()){
+    			String value = mEntry.getValue().toString();
+    			
+    			//Need to remove leading . for isNumeric to work with Doubles
+    			if(value.startsWith(".") & StringUtils.isNumeric(value.substring(1))){
+					newMap.put(mEntry.getKey().toString(), Double.parseDouble(value));
+    			}else if(StringUtils.isNumeric(mEntry.getValue().toString())){
+    				newMap.put(mEntry.getKey().toString(), Integer.parseInt(value));
+    			}else{
+    				newMap.put(mEntry.getKey().toString(), mEntry.getValue().toString());
+    			}
+    		}
+			newList.add(newMap);
+    	}
+     	
+     	return newList;
     }
     
     public String writeAsJson(List<Map<?, ?>> data) throws IOException {

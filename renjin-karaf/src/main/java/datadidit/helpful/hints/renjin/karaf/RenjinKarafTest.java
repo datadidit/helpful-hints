@@ -9,6 +9,10 @@ public class RenjinKarafTest
 	private ScriptEngine engine;
 	
 	public RenjinKarafTest(){
+
+	}
+	
+	public void testRuntime() throws ScriptException{
     	//TODO: Make sure you compile with 1.8
     	// create a script engine manager:
         ScriptEngineManager manager = new ScriptEngineManager();
@@ -19,9 +23,7 @@ public class RenjinKarafTest
         if(engine == null) {
             throw new RuntimeException("Renjin Script Engine not found on the classpath.");
         }	
-	}
-	
-	public void testRuntime() throws ScriptException{
+        
         engine.eval("df <- data.frame(x=1:10, y=(1:10)+rnorm(n=10))");
         engine.eval("print(df)");
         engine.eval("print(lm(y ~ x, df))");

@@ -27,7 +27,6 @@
 		<dependency>
 			<groupId>org.renjin</groupId>
 			<artifactId>renjin-script-engine</artifactId>
-			<version>0.7.0-RC7</version>
 		</dependency>
 		<!-- Jackson stuff -->
 		<dependency>

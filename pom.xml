@@ -21,9 +21,19 @@
 		<jersey1.version>1.19</jersey1.version>
 		<camel.version>2.17.2</camel.version>
 		<cxf.version>3.1.3</cxf.version>
+		<!--<renjin.version>0.8.2280</renjin.version>-->
+		<!--
+			<renjin.version>0.7.0-RC7</renjin.version>
+		-->
+		<renjin.version>0.7.1579</renjin.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.renjin</groupId>
+				<artifactId>renjin-script-engine</artifactId>
+				<version>${renjin.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.jaxrs</groupId>
 				<artifactId>jackson-jaxrs-json-provider</artifactId>

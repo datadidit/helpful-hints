@@ -9,6 +9,7 @@ import javax.script.ScriptException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.renjin.primitives.matrix.Matrix;
+import org.renjin.script.RenjinScriptEngine;
 import org.renjin.sexp.AttributeMap;
 import org.renjin.sexp.DoubleArrayVector;
 import org.renjin.sexp.DoubleVector;
@@ -16,7 +17,7 @@ import org.renjin.sexp.ListVector;
 import org.renjin.sexp.SEXP;
 import org.renjin.sexp.Vector;
 
-public class JenjinTest {
+public class RenjinTest {
 	private static ScriptEngine engine;
 	
 	@BeforeClass
@@ -27,7 +28,8 @@ public class JenjinTest {
         
         // create a Renjin engine:
         engine = manager.getEngineByName("Renjin");
-        
+        RenjinScriptEngine rEngine = (RenjinScriptEngine) engine;
+        System.out.println(rEngine.getFactory().getEngineName());
         // check if the engine has loaded correctly:
         if(engine == null) {
             throw new RuntimeException("Renjin Script Engine not found on the classpath.");

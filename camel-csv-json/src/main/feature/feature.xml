@@ -1,0 +1,14 @@
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="camel-csv-json">
+	<repository>mvn:org.apache.camel.karaf/apache-camel/2.18.0/xml/features</repository>
+    <feature name="datadidit-camel-csv-json" description="My version of Camel CSV Json" version="1.0.0.SNAPSHOT">
+    	<feature>camel-blueprint</feature>
+    	<feature>camel-mongodb</feature>
+        <bundle>mvn:org.apache.commons/commons-lang3/3.5</bundle>
+        <bundle>mvn:commons-io/commons-io/2.5</bundle>    	
+    	<bundle>mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-csv/2.8.0</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.8.0</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.8.0</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.8.0</bundle>
+   		<bundle>mvn:datadidit.helpful.hints/camel-csv-json/1.0.0-SNAPSHOT</bundle>
+    </feature>
+</features>

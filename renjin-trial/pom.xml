@@ -27,6 +27,11 @@
 		<dependency>
 			<groupId>org.renjin</groupId>
 			<artifactId>renjin-script-engine</artifactId>
+<<<<<<< HEAD
+=======
+			<version>0.7.0-RC7</version>
+			<scope>provided</scope>
+>>>>>>> a79b6188b7f63dcf86e436c7bc79abd76e7452a8
 		</dependency>
 		<!-- Jackson stuff -->
 		<dependency>
@@ -50,13 +55,4 @@
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.version}</version>
-			</plugin>
-		</plugins>
-	</build>
 </project>

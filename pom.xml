@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>datadidit.helpful.hints</groupId>
 	<artifactId>parent</artifactId>
@@ -15,7 +14,8 @@
 		<module>csv-provider</module>
 		<module>jetty-cxf</module>
 		<module>renjin-trial</module>
-	</modules>
+    <module>renjin-karaf</module>
+  </modules>
 	<properties>
 		<jetty.version>9.2.10.v20150310</jetty.version>
 		<jersey1.version>1.19</jersey1.version>
@@ -122,6 +122,17 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- https://mvnrepository.com/artifact/org.apache.karaf.tooling/karaf-maven-plugin -->
+				<plugin>
+					<groupId>org.apache.karaf.tooling</groupId>
+					<artifactId>karaf-maven-plugin</artifactId>
+					<version>4.0.7</version>
+					<extensions>true</extensions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

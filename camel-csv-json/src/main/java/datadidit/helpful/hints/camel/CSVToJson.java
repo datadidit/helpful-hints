@@ -117,9 +117,8 @@ public class CSVToJson implements Processor{
     		Map<String,Object> newMap = new HashMap<String,Object>();
     		for(Map.Entry<?, ?> mEntry : entry.entrySet()){
     			String value = mEntry.getValue().toString();
-    			
     			//Need to remove leading . for isNumeric to work with Doubles
-    			if(value.startsWith(".") & StringUtils.isNumeric(value.substring(1))){
+    			if(value.startsWith(".") && StringUtils.isNumeric(value.substring(1))){
 					newMap.put(mEntry.getKey().toString(), Double.parseDouble(value));
     			}else if(StringUtils.isNumeric(mEntry.getValue().toString())){
     				newMap.put(mEntry.getKey().toString(), Integer.parseInt(value));

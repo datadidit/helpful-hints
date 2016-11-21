@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+ 
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+      	<template id="myTemplate" defaultEndpoint="direct:handleJson"/>
+ 		<!-- 
+    		Route that takes in a CSV file and outputs JSON
+     	-->
+    	<route id="csv-to-json">
+    		<from uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/process-csv?delete=true" />
+    		<process ref="csvToJson" />
+    		<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/process-complete" />
+    	</route>
+    
+    	<route id="handleJson">
+    		<from uri="direct:handleJson" />
+    		<log message="Got ${body}" />
+    		<to uri="mongodb:mongoBean?database=baseball&amp;collection=minorLeagueHitter&amp;operation=insert" />
+    	</route>   	
+        <!--
+        Initial Sample Route
+        <route>
+            <from uri="timer:test" />
+            <to uri="log:test" />
+        </route>
+    	-->
+    </camelContext>
+    <bean id="MongoPort" class="java.lang.Integer" factory-method="valueOf">
+    	<argument value="27017" />
+    </bean>
+   <bean id="mongoBean" class="com.mongodb.MongoClient">
+  	<argument value="127.0.0.1" />
+    <argument ref="MongoPort" />
+  </bean>
+  
+  <bean id="csvToJson" class="datadidit.helpful.hints.camel.CSVToJson" >
+  	<property name="producer" ref="myTemplate" />
+  	<argument value="true"/>
+  	<argument value="" />
+  </bean>
+ 
+</blueprint>

@@ -59,4 +59,11 @@ public class CSVToJsonTest {
 		List<Map<?, ?>> data = converter.readObjectsFromCsv(new FileInputStream(new File("src/test/resources/massaged.csv")));
 		System.out.println(converter.writeAsJson(data));
 	}
+	
+	@Test
+	public void testIssueJson() throws Exception{
+        converter = new CSVToJson(true, null);
+		List<Map<?, ?>> data = converter.readObjectsFromCsv(new FileInputStream(new File("src/test/resources/break.csv")));
+		System.out.println(converter.writeAsJson(data));
+	}
 }

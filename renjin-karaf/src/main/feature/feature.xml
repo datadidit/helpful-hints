@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="renjin-karaf">
-	<feature name="extended-renjin-karaf" description="renjin-karaf" version="1.0.0.SNAPSHOT">
+	<feature name="datadidit-renjin-karaf" description="renjin-karaf" version="1.0.0.SNAPSHOT">
 		<!-- Rabbit Hole... -->
 		<bundle>wrap:mvn:com.jcraft/jsch/0.1.54</bundle>
 		<bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
@@ -10,5 +10,6 @@
    		<bundle>wrap:mvn:org.apache.ant/ant/1.9.7</bundle>
 		<bundle>wrap:mvn:org.apache.commons/commons-vfs2/2.0</bundle>
 		<bundle>wrap:mvn:javax.servlet/javax.servlet-api/3.1.0</bundle>
+		<bundle>mvn:datadidit.helpful.hints/renjin-karaf/1.0.0-SNAPSHOT</bundle>
 	</feature>
 </features>

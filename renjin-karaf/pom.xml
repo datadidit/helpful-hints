@@ -16,7 +16,8 @@
 		<dependency>
 			<groupId>org.renjin</groupId>
 			<artifactId>renjin-script-engine</artifactId>
-			<version>0.7.0-RC7</version>
+			<version>${renjin.version}</version>
+			<classifier>jar-with-dependencies</classifier>			
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -37,6 +38,20 @@
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Embed-Dependency>renjin-script-engine</Embed-Dependency>
+						<Import-Package>
+							org.junit.*;resolution:=optional,
+							junit.framework;resolution:=optional,
+							sun.nio.cs;resolution:=optional,
+							org.apache.log;resolution:=optional,
+							org.codehaus.*;resolution:=optional,
+							org.joda.convert;resolution:=optional,
+							*
+						</Import-Package>
+					</instructions>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.karaf.tooling</groupId>

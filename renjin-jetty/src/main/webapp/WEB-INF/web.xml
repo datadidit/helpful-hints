@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Renjin REST Example</display-name>
+	<servlet>
+		<servlet-name>MyApplication</servlet-name>
+ 		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>		
+ 		<!-- Name of the resource -->
+ 		<init-param>
+  			<param-name>jaxrs.serviceClasses</param-name>
+  			<param-value>
+  				datadidit.helpful.hints.renjin.rest.RenjinTrialResource
+  			</param-value>
+ 		</init-param>
+ 		<!-- Name of the providers -->
+  		<init-param>
+  			<param-name>jaxrs.providers</param-name>
+  			<param-value>
+				com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider,  			
+    			com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider,
+    			datadidit.helpfulhints.provider.BeanProvider
+  			</param-value>
+ 		</init-param>
+ 		<!-- Name of the extensions -->
+		<init-param>
+  			<param-name>jaxrs.extensions</param-name>
+  			<param-value>
+    			json=application/json
+    			xml=application/xml
+  			</param-value>
+ 		</init-param> 				
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>MyApplication</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>

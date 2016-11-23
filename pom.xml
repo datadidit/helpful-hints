@@ -13,7 +13,7 @@
 		<module>camel-csv-json</module>
 		<module>csv-provider</module>
 		<module>jetty-cxf</module>
-		<module>renjin-trial</module>
+		<module>renjin-jetty</module>
     <module>renjin-karaf</module>
   </modules>
 	<properties>

@@ -10,5 +10,16 @@
         <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.8.0</bundle>
         <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.8.0</bundle>
    		<bundle>mvn:datadidit.helpful.hints/camel-csv-json/1.0.0-SNAPSHOT</bundle>
+   		<!--
+   			Deploy CAMEL ROUTES via file at run time using this mechanism...
+   		-->        
+ 		<config name="org.apache.felix.fileinstall-camel" append="false">
+			felix.fileinstall.dir           = ${karaf.base}/camel
+			felix.fileinstall.tmpdir        = ${karaf.data}/camel-routes
+			felix.fileinstall.poll          = 1000
+			felix.fileinstall.start.level   = 80
+			felix.fileinstall.active.level  = 80
+			felix.fileinstall.log.level     = 3        
+        </config>
     </feature>
 </features>

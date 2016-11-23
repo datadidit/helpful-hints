@@ -7,4 +7,5 @@ Project to hold useful code examples for later reference...
 * [camel-csv-json](camel-csv-json/readme.md): Sample project that uses camel to turn a CSV file into JSON. 
 * [jetty-cxf](jetty-cxf/readme.md): Simple REST Example using CXF. 
 * [csv-provider](csv-provider/readme.md): Example of a REST Service that uses Jackson Providers and has a Custom Provider to make CSVs. 
-* [renjin-trial](renjin-trial/readme.md): Example of a webservice that uses both R and Java. 
+* [renjin-jetty](renjin-jetty/readme.md): Example of a webservice that uses both R and Java. 
+* [renjin-karaf](renjin-karaf/readme.md): Example of a combining renjin with an Karaf(OSGi container). 

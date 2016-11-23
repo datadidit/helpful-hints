@@ -1,8 +1,6 @@
 ## Renjin Karaf Example ##
 ***
 
-Trying to run renjin commands in Karaf environment. But am having a lot of trouble picking up the script engine. 
-
 ## Install Instructions ##
 
 After building project. Run the following commands inside karaf:

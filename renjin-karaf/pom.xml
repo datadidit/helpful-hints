@@ -20,6 +20,12 @@
 			<classifier>jar-with-dependencies</classifier>			
 		</dependency>
 		<dependency>
+			<groupId>org.renjin</groupId>
+			<artifactId>renjin-asm</artifactId>
+			<version>5.0.4b</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -40,7 +46,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Embed-Dependency>renjin-script-engine</Embed-Dependency>
+						<Embed-Dependency>renjin-script-engine,renjin-asm</Embed-Dependency>
 						<Import-Package>
 							org.junit.*;resolution:=optional,
 							junit.framework;resolution:=optional,
@@ -48,6 +54,7 @@
 							org.apache.log;resolution:=optional,
 							org.codehaus.*;resolution:=optional,
 							org.joda.convert;resolution:=optional,
+							org.renjin.repackaged.asm.tree.analysis;resolution:=optional,
 							*
 						</Import-Package>
 					</instructions>

@@ -10,6 +10,7 @@
 	</parent>
 	<artifactId>csv-provider</artifactId>
 	<name>csv-provider</name>
+	<packaging>bundle</packaging>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -21,13 +22,13 @@
 			<artifactId>javax.ws.rs-api</artifactId>
 		</dependency>
 		<dependency>
-     		<groupId>com.fasterxml.jackson.jaxrs</groupId> 			
-  			<artifactId>jackson-jaxrs-json-provider</artifactId>		
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
 		</dependency>
 		<dependency>
-     		<groupId>com.fasterxml.jackson.jaxrs</groupId> 			
-  			<artifactId>jackson-jaxrs-xml-provider</artifactId>		
-		</dependency>		
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-xml-provider</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-csv</artifactId>
@@ -48,6 +49,11 @@
 	</dependencies>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+			</plugin>
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>

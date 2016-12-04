@@ -9,6 +9,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>csv-provider</artifactId>
+	<version>1.0.0</version>
 	<name>csv-provider</name>
 	<packaging>bundle</packaging>
 	<url>http://maven.apache.org</url>

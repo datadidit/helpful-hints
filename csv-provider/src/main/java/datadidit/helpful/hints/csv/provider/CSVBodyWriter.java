@@ -77,6 +77,8 @@ public class CSVBodyWriter implements MessageBodyWriter<Object>{
 					throw new IOException("Unable to retrieve toMap() "+e.getMessage());
 				} 
 			}else{
+				logger.log(Level.FINE, "List class is "+myList.get(0).getClass().getName());
+				logger.log(Level.FINE, "Size of list "+myList.size());
 				schema = csvMapper.schemaFor(myList.get(0).getClass()).withHeader();
 				csvMapper.writer(schema).writeValue(arg6, myList);
 			}

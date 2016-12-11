@@ -9,11 +9,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class RenginModelImplTest {
-	private static RenjinModelImpl impl;
+	private static RenjinLinearModelImpl impl;
 	
 	@BeforeClass
 	public static void setup(){
-		impl = new RenjinModelImpl();
+		impl = new RenjinLinearModelImpl();
 	}
 	
 	@Test
@@ -37,6 +37,6 @@ public class RenginModelImplTest {
 		
 		x = new ArrayList<>(); 
 		x.add(200.0);
-		System.out.println(impl.getPrediction(x));
+		System.out.println(impl.getLMResult(x));
 	}
 }

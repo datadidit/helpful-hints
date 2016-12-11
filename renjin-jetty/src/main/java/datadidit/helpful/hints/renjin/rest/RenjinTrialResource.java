@@ -15,14 +15,14 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import datadidit.helpful.hints.renjin.impl.RenjinModelImpl;
+import datadidit.helpful.hints.renjin.impl.RenjinLinearModelImpl;
 import datadidit.helpful.hints.renjin.model.RModel;
 import datadidit.helpful.hints.renjin.model.RPrediction;
 import datadidit.helpful.hints.renjin.rest.bean.LMInputBean;
 
 @Path("renjin")
 public class RenjinTrialResource {
-	private RenjinModelImpl impl = new RenjinModelImpl();
+	private RenjinLinearModelImpl impl = new RenjinLinearModelImpl();
 	
 	@GET
 	@Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
@@ -57,7 +57,7 @@ public class RenjinTrialResource {
 	@Path("model/predict")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})	
 	public RPrediction passInSampleInput(@QueryParam("input") Double input) throws ScriptException{
-		return impl.getPrediction(Collections.singletonList(input));
+		return impl.getLMResult(Collections.singletonList(input));
 	}
 	
 	//TODO: Move this elsewhere 

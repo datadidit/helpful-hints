@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">    
-   <bean id="renjinTest" class="datadidit.helpful.hints.renjin.karaf.RenjinKarafTest" init-method="testRuntime" >   	
-   </bean> 
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd 
+						http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
+						http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
+	<!-- Bring in Service -->
+	<reference id="lmRef" interface="datadidit.helpful.hints.renjin.RenjinLinearModel" availability="optional" />
+
+	<jaxrs:server id="renjinResource" address="/example">
+		<jaxrs:serviceBeans>
+			<ref component-id="renjinLMResource" />
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+			<entry key="json" value="application/json" />
+			<entry key="xml" value="application/xml" />
+		</jaxrs:extensionMappings>
+		<jaxrs:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider" />
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+			<bean class="datadidit.helpfulhints.provider.BeanProvider" />
+			<bean class="org.apache.cxf.jaxrs.model.wadl.WadlGenerator">
+				<property name="singleResourceMultipleMethods" value="false" />
+				<property name="applicationTitle" value="Baseball Predictions Rest Resource" />
+			</bean>
+			<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter" />									
+		</jaxrs:providers>
+	</jaxrs:server>
+
+	<bean id="renjinLMResource" class="datadidit.helpful.hints.renjin.karaf.RenjinExampleResource">
+		<property name="lm" ref="lmRef" />
+	</bean>
+	
+	<!-- Used for original unit tests... 
+	<bean id="renjinTest" class="datadidit.helpful.hints.renjin.karaf.RenjinKarafTest" init-method="testRuntime" > 
+	</bean> 
+	-->
 </blueprint>

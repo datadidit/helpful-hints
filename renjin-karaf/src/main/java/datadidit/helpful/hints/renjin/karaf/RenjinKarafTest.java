@@ -1,4 +1,4 @@
-package datadidit.helpful.hints.renjin.karaf;
+/*package datadidit.helpful.hints.renjin.karaf;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -35,3 +35,4 @@ public class RenjinKarafTest
         engine.eval("print(lm(y ~ x, df))");
 	}
 }
+*/

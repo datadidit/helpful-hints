@@ -6,24 +6,22 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import org.renjin.sexp.AtomicVector;
 import org.renjin.sexp.DoubleArrayVector;
 import org.renjin.sexp.ListVector;
-import org.renjin.sexp.SEXP;
-import org.renjin.sexp.StringVector;
 
+import datadidit.helpful.hints.renjin.RenjinLinearModel;
 import datadidit.helpful.hints.renjin.model.RModel;
 import datadidit.helpful.hints.renjin.model.RPrediction;
 import datadidit.helpful.hints.renjin.util.RenjinDataConverter;
 
-public class RenjinModelImpl {
-	private ScriptEngine engine;
+public class RenjinLinearModelImpl implements RenjinLinearModel {
+	ScriptEngine engine;
 	
-	private RenjinDataConverter converter; 
+	RenjinDataConverter converter; 
 	
-	private RModel model;
+	RModel model;
 	
-	public RenjinModelImpl(){
+	public RenjinLinearModelImpl(){
 		//TODO: Make sure you compile with 1.8
     	// create a script engine manager:
         ScriptEngineManager manager = new ScriptEngineManager();
@@ -57,7 +55,7 @@ public class RenjinModelImpl {
 		return this.model;
 	}
 	
-	public RPrediction getPrediction(List<Double> x) throws ScriptException{
+	public RPrediction getLMResult(List<Double> x) throws ScriptException{
 		if(engine.eval("model") != null){
 			engine.put("x", this.convertListToArray(x));
 			DoubleArrayVector dbVector = (DoubleArrayVector) engine.eval("predict(model, data.frame(x))");

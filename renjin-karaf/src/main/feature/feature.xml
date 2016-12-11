@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="renjin-karaf">
-	<feature name="datadidit-renjin-karaf-deps" description="renjin-karaf" version="1.0.0.SNAPSHOT">
-		<!-- Rabbit Hole... -->
+	<repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.7/xml/features</repository>
+	
+	<feature name="datadidit-renjin-karaf-deps" description="renjin-karaf" version="1.0.0-SNAPSHOT">
 		<bundle>wrap:mvn:com.jcraft/jsch/0.1.54</bundle>
 		<bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
 		<bundle>wrap:mvn:commons-httpclient/commons-httpclient/3.1</bundle>
@@ -11,8 +12,23 @@
 		<bundle>wrap:mvn:org.apache.commons/commons-vfs2/2.0</bundle>
 		<bundle>wrap:mvn:javax.servlet/javax.servlet-api/3.1.0</bundle>
 	</feature>
+	
+	<feature name="datadidit-rest-deps" descriprition="Rest dependencies" version="1.0.0-SNAPSHOT">
+		<feature version="3.1.7" prerequisite="true">cxf</feature>
+		<feature version="3.1.7" prerequisite="true">cxf-rs-security-cors</feature>	
+        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.1</bundle>
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.8.1</bundle>		
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.8.1</bundle>		
+        <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.8.1</bundle>
+        <bundle>mvn:com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.8.1</bundle>			
+        <bundle>mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-xml/2.8.1</bundle>    		
+		<bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-xml-provider/2.8.1</bundle>	
+		<bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.1</bundle>	
+	</feature>
+	
 	<feature name="datadidit-renjin-karaf" version="1.0.0.SNAPSHOT">
-		<feature>datadidit-renjin-karaf-deps</feature>
+		<feature prerequisite="true">datadidit-renjin-karaf-deps</feature>
+		<feature prerequisite="true">datadidit-rest-deps</feature>
 		<bundle>mvn:datadidit.helpful.hints/renjin-karaf/1.0.0-SNAPSHOT</bundle>
 	</feature>
 </features>

@@ -27,7 +27,7 @@
 		<init-param>
   			<param-name>jaxrs.extensions</param-name>
   			<param-value>
-    			json=application/json
+    			json=application/json,
     			xml=application/xml
   			</param-value>
  		</init-param> 				

@@ -13,9 +13,6 @@
 {"user": "Roy", "content": "Great workout!",
  "timestamp": " Mon Dec 23 2013 7:20 GMT-0800 (PST)",
  "retweets": [],"favorites": []},
-{"user": "Roy", "content": "Spectacular oatmeal!",
- "timestamp": " Mon Dec 23 2013 7:23 GMT-0800 (PST)",
- "retweets: [],"favorites": []},
 {"user": "Roy", "content": "Amazing traffic!",
  "timestamp": " Mon Dec 23 2013 7:47 GMT-0800 (PST)",
  "retweets": [],"favorites": []},
@@ -30,6 +27,9 @@
  "retweets": [],"favorites": ["Sally"]},
 {"user": "Sam", "content": "@Roy Let's get lunch",
  "timestamp": " Mon Dec 23 2013 11:05 GMT-0800 (PST)",
- "retweets": ["Pris"], "favorites": ["Sally", "Pris"]}
+ "retweets": ["Pris"], "favorites": ["Sally", "Pris"]},
+ {"user": "Roy", "content": "Spectacular oatmeal!",
+ "timestamp": " Mon Dec 23 2013 7:23 GMT-0800 (PST)",
+ "retweets": [],"favorites": []}
 ]
 }

@@ -24,6 +24,8 @@
 		<svg style="width:300px;height:300px;border:1px black solid">
 		</svg>
 	</div>
+	<div id="cities">
+	</div>
 </body>
 <!-- 
 	This needs to be after the svg canvas is drawn or it won't show up
@@ -34,9 +36,10 @@
 	//Show why you need to scale
 	//var randomData =  [14, 68, 24500, 430, 19, 1000, 5555]
 	var width = 40
+	var endRange = 300
 	var max = d3.max(randomData)
-	var yScale = d3.scaleLinear().domain([0, d3.max(randomData)]).range([0, 300])
-	
+	var yScale = d3.scaleLinear().domain([0, max]).range([0, endRange])
+	//d3.select("svg").attr("style", "height: 480px; width: 600px;")
 	d3.select("svg")
 	.selectAll("rect")
 	.data(randomData)
@@ -51,12 +54,34 @@
  	.style("stroke-width", "1px")
  	.style("opacity", .25)
 	.attr("x", function(d, i){
-		//i is index times the width. 
-		return i * width
+		//i is index times the width.
+		//This is doing the spacing
+		return i * (width+10)
 	})
 	.attr("y", function(d){
 		//return 300 - yScale(d)
-		return 300 - d
+		return endRange - d
 	})
+	
+	//TODO: Put multiple charts on one page
+	/*var citiesData, maxPopulation;
+	d3.csv('data/cities.csv', function(error, data){
+		citiesData = data
+		maxPopulation = d3.max(data, function(el) { return +el.population})
+	})
+	*/
+	//var maxPopulation = d3.max(citiesData, function(el) {
+	//	return parseInt(el.population);
+	//})
+
+	//Do cities bar chart
+	/*citiesSVG = d3.select("#cities").append("svg:svg").attr("style", "height: 480px; width: 600px;")
+	citiesSVG.selectAll("rect")
+		.data(citiesData)
+		.enter()
+		.append("rect")
+		.attr("width", 50)
+		.attr("height", function(d) { return yScale(parseInt(d.population))})
+	*/
 </script>
 </html>

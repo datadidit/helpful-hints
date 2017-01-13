@@ -49,3 +49,5 @@ d3.select("svg")
  .append("rect")
  .attr("width", 10)
  .attr("height", function(d) {return d;});
+ 
+Tweets.json has an error if you copy it directly from the pdf. 

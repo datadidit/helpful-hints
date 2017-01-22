@@ -6,7 +6,7 @@
 <script src="../node_modules/d3/build/d3.js" type="text/JavaScript"></script>
 </head>
 <body>
- <svg style="width:500px;height:500px;border:1px lightgray solid;" />
+ <svg style="width:550px;height:500px;border:1px lightgray solid;" />
 </svg>
 </body>
 <script type="text/javascript">
@@ -42,6 +42,25 @@ function dataViz(incomingData) {
 	.style("fill", function(d) {return colorScale(d.impact);})
 	.style("stroke", "black")
 	.style("stroke-width", "1px");
+	
+	//Append labels to scatter points
+	var tweetG = d3.select("svg")
+	.selectAll("g")
+	.data(incomingData)
+	.enter()
+	.append("g")
+	.attr("transform", function(d) {
+	return "translate(" +
+	timeRamp(d.tweetTime) + "," + (480 - yScale(d.impact))
+	+ ")";
+	});
+	tweetG.append("circle")
+	.attr("r", function(d) {return radiusScale(d.impact);})
+	.style("fill", "#990000")
+	.style("stroke", "black")
+	.style("stroke-width", "1px");
+	tweetG.append("text")
+	.text(function(d) {return d.user + "-" + d.tweetTime.getHours();});
 };
 </script>
 </html>

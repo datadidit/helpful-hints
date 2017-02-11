@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
    <bean id="orbexample" class="datadidit.helpful.hints.App" init-method="init"/>
+   
+   <jaxrs:server id="jacorbResource" address="/example">
+		<jaxrs:serviceBeans>
+			<ref component-id="jacorbBean" />
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+			<entry key="json" value="application/json" />
+			<entry key="xml" value="application/xml" />
+		</jaxrs:extensionMappings>
+		<jaxrs:providers>
+			<bean class="com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider" />
+			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+			<bean class="org.apache.cxf.jaxrs.model.wadl.WadlGenerator">
+				<property name="singleResourceMultipleMethods" value="false" />
+				<property name="applicationTitle" value="Baseball Predictions Rest Resource" />
+			</bean>
+			<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter" />									
+		</jaxrs:providers>
+	</jaxrs:server>
+	
+	<bean id="jacorbBean" class="datadidit.helpful.hints.rest.SampleResource">
+	</bean>
 </blueprint>

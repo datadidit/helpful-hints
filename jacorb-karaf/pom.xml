@@ -19,6 +19,19 @@
 			<artifactId>cfinterfaces</artifactId>
 			<version>2.0.4</version>
 		</dependency>
+		<!-- REST Deps -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-xml-provider</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

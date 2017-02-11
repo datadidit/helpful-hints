@@ -16,6 +16,7 @@
 		<module>renjin-jetty</module>
 		<module>renjin-karaf</module>
     <module>nifi-csv-json-bundle</module>
+    <module>jacorb-karaf</module>
   </modules>
 	<properties>
 		<jetty.version>9.3.14.v20161028</jetty.version>

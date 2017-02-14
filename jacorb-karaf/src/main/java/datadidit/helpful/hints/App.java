@@ -30,21 +30,33 @@ public class App {
 	
 	public void init() throws InvalidName, NotFound, CannotProceed, org.omg.CosNaming.NamingContextPackage.InvalidName  {
 		// connectionProperties.put("com.sun.CORBA.transport.ORBUseNIOSelectToWait","false");
-		connectionProperties.put(CORBA_NAME_SERVICE, "corbaname::" + DEFAULT_HOSTNAME + ":" + DEFAULT_NAMESERVICE_PORT);
+		//connectionProperties.put(CORBA_NAME_SERVICE, "corbaname::" + DEFAULT_HOSTNAME + ":" + DEFAULT_NAMESERVICE_PORT);
 		//connectionProperties.put("ORBInitialPort", 2809);
 		// System.setProperty("org.omg.CORBA.ORBClass", "org.jacorb.orb.ORB");
 		// System.getProperty("jacorb.classloaderpolicy", "forname");
 		logger.info("Hitting init");
-		ClassLoader cl = Thread.currentThread().getContextClassLoader();
-		Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
-		orb = org.omg.CORBA.ORB.init((String[])null, connectionProperties);
+		//ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		//Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+		String[] args = new String[2];
+		//-ORBInitRef
+		//NameService=corbaname::127.0.0.1:2809
+
+		args[0] = "-ORBInitRef";
+		args[1] = "NameService=corbaname::127.0.0.1:2809";
+		
+		//orb = org.omg.CORBA.ORB.init((String[])null, connectionProperties);
+		orb = org.omg.CORBA.ORB.init(args, null);		
 		objRef = orb.resolve_initial_references("NameService");
 		//Works If I keep this in
 		//NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
 		//String domainManagerUrl = "REDHAWK_DEV/REDHAWK_DEV";
 		//DomainManager domainManager = DomainManagerHelper.narrow(ncRef.resolve_str(domainManagerUrl));
 		//logger.info(domainManager.name());
-		Thread.currentThread().setContextClassLoader(cl);
+		//Thread.currentThread().setContextClassLoader(cl);
+		NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
+		String domainManagerUrl = "REDHAWK_DEV/REDHAWK_DEV";
+		DomainManager domainManager = DomainManagerHelper.narrow(ncRef.resolve_str(domainManagerUrl));
+		logger.info(domainManager.name());
 		logger.info("Able to hit");
 
 		// this.findDomainManagers(ncRef, ncRef, "");

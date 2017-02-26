@@ -32,6 +32,13 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 		</dependency>
+		<!-- Jacorb -->
+<!-- https://mvnrepository.com/artifact/org.jacorb/jacorb -->
+<dependency>
+    <groupId>org.jacorb</groupId>
+    <artifactId>jacorb</artifactId>
+    <version>3.8</version>
+</dependency>		
 	</dependencies>
 	<build>
 		<plugins>

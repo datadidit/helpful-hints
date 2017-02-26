@@ -56,10 +56,27 @@ function createSoccerViz() {
 			});
 		};
 		
+		//New Highlight Region
+		function highlightRegion2(d, i){
+			d3.select(this).select("text").classed("active", true).attr("y", 10);
+			d3.selectAll("g.overallG").select("circle").each(function(p, i){
+				p.region == d.region ?
+						d3.select(this).classed("active", true) :
+						d3.select(this).classed("inactive", true);
+			})
+		}
+		
 		//Reset color
-		teamG.on("mouseout", function() {
-			d3.selectAll("g.overallG").select("circle").style("fill", "pink");
-		});
+		//teamG.on("mouseout", function() {
+		//	d3.selectAll("g.overallG").select("circle").style("fill", "pink");
+		//});
+		teamG.on("mouseout", unHighlight)
+		
+		function unHighlight(){
+			d3.selectAll("g.overallG").select("circle").attr("class", "");
+			d3.selectAll("g.overallG").select("text")
+				.classed("highlight", false).attr("y", 30);
+		}
 		
 		//Add Buttons 
 		var dataKeys = d3.keys(incomingData[0]).filter(function(el) {

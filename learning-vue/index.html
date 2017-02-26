@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="node_modules/vue/dist/vue.js"></script>
+<meta charset="ISO-8859-1">
+<title>Command and Control</title>
+</head>
+<body>
+	<div id="app">
+		{{ message }}
+	</div>
+	<div id="categorySelect">
+		<h1>Category</h1>
+		<select v-model="selected" multiple>
+			<option v-on:click="fillValues()" v-for="option in options" v-bind:value="option">
+    			{{ option }}
+  			</option>
+		</select>
+	</div>
+	<div id="valuesForCategory">
+		<h1>Values</h1>
+		<select v-on:dblclick="popUp()" v-model="selected" multiple>
+			<option v-for="option in options" v-bind:value="option">
+				{{ option }}
+			</option>
+		</select>
+	</div>
+	<div id="transitionPlay">
+		<p v-if="show">
+			{{ message }}
+		</p>
+	</div>
+</body>
+<script src="js/app.js"></script>
+</html>

@@ -8,7 +8,8 @@ var words = ['hello', 'world', 'foo', 'bar']
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!'
+    message: 'Hello Vue!',
+    showModal: false
   }
 })
 
@@ -39,21 +40,35 @@ var valForCat = new Vue({
 	el: '#valuesForCategory',
 	data: {
 		selected: [],
-		options: []
+		options: [],
 	},
 	methods: {
 		popUp: function(){
 			console.log("Handling Double Click")
 			myTransition.message = "Category: "+catSelect.selected+" Value: "+valForCat.selected
 			myTransition.show = true
+			myTransition.showModal2 = true
 		}
 	}
+})
+
+Vue.component('my-first-component', {
+	template: '<div>A custom component!</div>'
+})
+
+Vue.component('modal', {
+	template: '#modal-template'
+})
+
+var compExample = new Vue({
+	el: '#example'
 })
 
 var  myTransition = new Vue({
 	el: '#transitionPlay',
 	data: {
 		show: false,
-		message: null
+		message: null,
+		showModal2: false
 	}
 })

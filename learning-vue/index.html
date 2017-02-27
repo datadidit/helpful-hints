@@ -14,6 +14,7 @@
 	</transition>
 </script>
 -->
+<!-- Default Modal From Vue -->
 <script type="text/x-template" id="modal-template">
   <transition name="modal">
     <div class="modal-mask">
@@ -45,19 +46,59 @@
     </div>
   </transition>
 </script>
+<!-- Button Modal -->
+<script type="text/x-template" id="button-modal-template">
+	<transition name="button-modal">
+		<div class="modal-mask">
+			<div class="button-wrapper">
+				<div class="modal-container">
+					<div>
+					<slot name="header">
+						Hello Header
+					</slot>
+					</div>
+					<div>
+					<slot name="body">
+						<button>Start</button>
+						<button>Stop</button>
+						<button>Release</button>
+						<button class="modal-default-button" @click="$emit('close')">OK</button>					
+					</slot>
+					</div>
+				</div>
+			</div>
+		</div>
+	</transition>
+</script>
+<script type="text/x-template" id="history-modal-template">
+	<transition name="history-modal">
+		<div class="modal-mask">
+			<div>
+				<div class="modal-container">
+					<div>
+						<h1>History</h1>
+					</div>
+					<div>
+						<button class="modal-default-button" @click="$emit('close')">OK</button>											
+					</div>
+				</div>
+			</div>
+		</div>
+	</transition>
+</script>
 </head>
 <body>
 	<div id="app">
 		{{ message }}
-		  <button id="show-modal" @click="showModal = true">Show Modal</button>
+		  <button id="show-modal" @click="showButtonModal = true">Show Modal</button>
+		  <button-modal v-if="showButtonModal" @close="showButtonModal = false">
+		  </button-modal>
 		    <!-- use the modal component, pass in the prop -->
+  <!--
   <modal v-if="showModal" @close="showModal = false">
-    <!--
-      you can use custom content here to overwrite
-      default content
-    -->
     <h3 slot="header">custom header</h3>
   </modal>
+	-->
 	</div>
 	<div id="categorySelect">
 		<h1>Category</h1>
@@ -89,6 +130,11 @@
 	</div>
 	<div id="example">
 		<my-first-component></my-first-component>
+	</div>
+	<div id="history">
+		<button id="historyButton" @click="showHistoryModal = true">History</button>
+		<history-modal v-if="showHistoryModal" @close="showHistoryModal = false">
+		</history-modal>
 	</div>
 </body>
 <script src="js/app.js"></script>

@@ -4,12 +4,13 @@
 var numbers = ['1', '2', '3', '4', '5', '6']
 var letters = ['a', 'b', 'c', 'd', 'e', 'f']
 var words = ['hello', 'world', 'foo', 'bar']
+var myHistory = new Array()
 
 var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!',
-    showModal: false
+    showButtonModal: false
   }
 })
 
@@ -48,6 +49,10 @@ var valForCat = new Vue({
 			myTransition.message = "Category: "+catSelect.selected+" Value: "+valForCat.selected
 			myTransition.show = true
 			myTransition.showModal2 = true
+			record = new Object()
+			record.category = catSelect.selected
+			record.category = this.selected
+			myHistory.push(record)
 		}
 	}
 })
@@ -60,15 +65,30 @@ Vue.component('modal', {
 	template: '#modal-template'
 })
 
+Vue.component('button-modal', {
+	template: '#button-modal-template'
+})
+
+Vue.component('history-modal', {
+	template: '#history-modal-template'
+})
+
 var compExample = new Vue({
 	el: '#example'
 })
 
-var  myTransition = new Vue({
+var myTransition = new Vue({
 	el: '#transitionPlay',
 	data: {
 		show: false,
 		message: null,
 		showModal2: false
+	}
+})
+
+var myHistory = new Vue({
+	el: '#history',
+	data: {
+		showHistoryModal: false
 	}
 })

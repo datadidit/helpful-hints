@@ -68,3 +68,7 @@
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+#dynamicTrial > input {
+	margin: 10px 5px;
+}

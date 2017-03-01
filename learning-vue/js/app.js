@@ -5,13 +5,27 @@ var numbers = ['1', '2', '3', '4', '5', '6']
 var letters = ['a', 'b', 'c', 'd', 'e', 'f']
 var words = ['hello', 'world', 'foo', 'bar']
 var myHistory = new Array()
-
 var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!',
     showButtonModal: false
   }
+})
+
+var dynamicTrial = new Vue({
+	el: '#dynamicTrial',
+	data: {
+		inputs: [
+		        {"name":"Marcus", "age":29},
+		        {"name":"Joy", "age":26}
+		        ]
+	},
+	methods: {
+		update: function(){
+			console.log("Update..."+entry)
+		}
+	}
 })
 
 var catSelect = new Vue({
@@ -73,6 +87,28 @@ Vue.component('history-modal', {
 	template: '#history-modal-template'
 })
 
+Vue.component('property-component',{
+	template: '#property-template',
+	methods: {
+		updateProp: function(){
+			console.log("Update this property "+this.item.name)
+		}
+	},
+	props: ['item']
+})
+
+var dynamicTrialTwo = new Vue({
+	el: '#dynamicTrialWithComponent',
+	data: {
+		items: [
+		        {"name":"Marcus","age":29},
+		        {"name":"Joy", "age":26},
+		        {"name":"Malcolm", "age":25},
+		        {"name":"Hope", "age":18}
+		        ]
+	}
+})
+
 var compExample = new Vue({
 	el: '#example'
 })
@@ -86,7 +122,7 @@ var myTransition = new Vue({
 	}
 })
 
-var myHistory = new Vue({
+var historyVue = new Vue({
 	el: '#history',
 	data: {
 		showHistoryModal: false

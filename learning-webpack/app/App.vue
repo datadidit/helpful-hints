@@ -1,6 +1,6 @@
 <template>
 	<div id="quarus-css-example">
-		<button class="primary" @click="clickMethod()">Button Label</button>	
+		<button class="primary">Button Label</button>	
 	</div>
 </template>
 

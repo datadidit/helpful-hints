@@ -25,34 +25,35 @@
   <camelContext xmlns="http://camel.apache.org/schema/spring">
   	<template id="myTemplate" defaultEndpoint="direct:handleJson"/>
     <!-- 
-    	Simple Hello world route to get things setup
-     -->
-    <route id="hello-camel">
-    	<from uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/input" />
-    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/output" />
-    </route>
-    
-    <!-- 
     	Route that takes in a CSV file and outputs JSON
      -->
     <route id="csv-to-json">
-    	<from uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/process-csv?delete=true" />
+    	<from uri="file:///Users/mkwyc_000/workspace/git/apache-camel/process-csv?delete=true" />
     	<process ref="csvToJson" />
-    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel-2.17.2/process-complete" />
+    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel/process-complete" />
     </route>
     
+    <!-- 
+    	Route to turn CSV into JSON and insert into Mongo 
+     -->
     <route id="handleJson">
     	<from uri="direct:handleJson" />
     	<log message="Got ${body}" />
-    	<to uri="mongodb:mongoBean?database=baseball&amp;collection=minorLeagueHitter&amp;operation=insert" />
+    	<to uri="mongodb:mongoBean?database=example&amp;collection=testCollection&amp;operation=insert" />
     </route>
   </camelContext>
   
+  <!-- 
+  	Bean instantiation for Mongo Client
+   -->
   <bean id="mongoBean" class="com.mongodb.Mongo">
   	<constructor-arg name="host" value="127.0.0.1" />
     <constructor-arg name="port" value="27017" />
   </bean>
   
+  <!-- 
+	Bean instantiation of CSVToJson
+   -->
   <bean id="csvToJson" class="datadidit.helpful.hints.camel.CSVToJson" >
   	<property name="producer" ref="myTemplate" />
   	<constructor-arg type="java.lang.Boolean" value="true"/>

@@ -56,9 +56,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
 
 @Tags({"csv", "json", "convert"})
 @CapabilityDescription("Converts a CSV file into JSON.")
+//@WritesAttributes({@WritesAttribute(attribute="", description="")})
 //@SeeAlso({})
 //@ReadsAttributes({@ReadsAttribute(attribute="", description="")})
-//@WritesAttributes({@WritesAttribute(attribute="", description="")})
 public class ConvertCSVToJSON extends AbstractProcessor {
 	private static final String APPLICATION_JSON = "application/json";
 	
@@ -124,11 +124,13 @@ public class ConvertCSVToJSON extends AbstractProcessor {
 
     @OnScheduled
     public void onScheduled(final ProcessContext context) throws ConfigurationException {
-    	//I'd like to only initialize the Schema once. Either this or/OnAdded should do 
-    	//the trick...
+    	//Retrieve properties from context
     	Boolean header = context.getProperty(HEADER).asBoolean();
     	String fieldNames = context.getProperty(FIELD_NAMES).getValue();
     
+    	/*
+    	 * Create Schema based on properties from user. 
+    	 */
 		if(!header && fieldNames!=null){
 			Builder build = CsvSchema.builder();
 			for(String field : fieldNames.split(",")){
@@ -153,10 +155,10 @@ public class ConvertCSVToJSON extends AbstractProcessor {
         
         try {
             //Read in Data
-            //TODO: Why would I need a InputStreamCallback???
         	InputStream stream = session.read(flowFile);
         	String csv = IOUtils.toString(stream, "UTF-8");
 			stream.close();
+			
         	//Convert CSV data to JSON
 			List<Map<?,?>> objects = this.readObjectsFromCsv(csv);
 			
@@ -176,14 +178,9 @@ public class ConvertCSVToJSON extends AbstractProcessor {
 			output = session.putAttribute(output, CoreAttributes.FILENAME.key(), UUID.randomUUID().toString()+".json");
 			session.transfer(output, REL_SUCCESS);
         } catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+        	getLogger().error("Unable to process Change CSV to JSON for this file "+flowFile.getAttributes().get(CoreAttributes.FILENAME));
+			session.transfer(flowFile, REL_FAILURE);
 		}
-        
-       
-        // TODO implement
-        //Loop through lines in CSV file skipping first line if header present
-        //Output a Flow File with JSON for each line of the CSV
     }
     
     

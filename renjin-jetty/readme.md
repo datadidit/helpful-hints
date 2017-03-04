@@ -5,7 +5,13 @@
 * This is a maven project so you'll need maven installed on your system 
 * Follow Renjin instructions so pom can download renjin dependencies: http://docs.renjin.org/en/latest/library/project-setup.html#maven
 
+### Live Example ###
+***
+
+[![Live Demo](http://i3.ytimg.com/vi/VVrCd30JKZ8/hqdefault.jpg)](https://www.youtube.com/watch?v=VVrCd30JKZ8)
+
 ### Usage ###
+***
 
 * Start maven
 	

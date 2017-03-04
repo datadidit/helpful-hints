@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="node_modules/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="css/modal.css">
+<title>Interactive Table</title>
+<script type="text/x-template" id="add-modal-template">
+	<transition name="add">
+		<div class="modal-mask">
+      		<div class="modal-wrapper">
+        		<div class="modal-container">
+					<div>
+						<span>Name: <input v-model="name" placeholder="Enter Name"></input></span><br>
+						<span>Age: <input v-model="age" placeholder="Enter Age"></input></span>
+					</div>
+					<div>
+						<button @click="addData">Add</button>
+						<button @click="$emit('close')">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</transition>
+</script>
+<script type="text/x-template" id="custom-row-template">
+	<tr><td>{{ name }}</td><td> {{ age }}</td><td><button v-on:click="moreInfo">More Info</button></td><td><button v-on:click="deleteRow">Delete</button></td></tr>
+</script>
+</head>
+<body>
+<div id="modalExample">
+	Interactive table example
+	<button id="show-modal" @click="showAddModal = true">Add</button>
+	<add-modal v-if="showAddModal" @close="showAddModal = false"></add-modal>
+</div>
+<div id="customRowExample">
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Age</th>
+		<th>More Info</th>
+		<th>Delete</th>		
+	</tr>
+	<tr is="custom-row"
+		v-for="item in items"
+		v-bind:item="item"
+	></tr>
+</table>
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>

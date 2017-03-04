@@ -19,13 +19,19 @@ import datadidit.helpful.hints.renjin.RenjinLinearModel;
 import datadidit.helpful.hints.renjin.model.RModel;
 import datadidit.helpful.hints.renjin.model.RPrediction;
 import datadidit.helpful.hints.renjin.rest.bean.LMInputBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @Path("renjin")
+@Api(value = "/renjin", description = "Example Renjin")
 public class RenjinExampleResource {
 	RenjinLinearModel lm;
 	
 	@GET
 	@Produces({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
+	 @ApiOperation(
+		        value = "Hello endpoint"
+		    )	
 	public Response sayHello(){
 		return Response.ok("Hello Renjin Resource").build();
 	}
@@ -34,6 +40,9 @@ public class RenjinExampleResource {
 	@Path("model")
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
+	 @ApiOperation(
+		        value = "Hello endpoint"
+		    )		
 	public RModel addLMInput(LMInputBean bean) throws ScriptException{
 		System.out.println("Bean is: "+bean);
 		return lm.createModel(bean.getX(), bean.getY());
@@ -42,6 +51,9 @@ public class RenjinExampleResource {
 	@GET
 	@Path("model/generateRandomModel")
 	@Produces({MediaType.APPLICATION_XML})
+	 @ApiOperation(
+		        value = "Hello endpoint"
+		    )		
 	public RModel addRandomLMInput() throws ScriptException{
 		return lm.createModel(this.generateListOfRandomNumber(100), this.generateListOfRandomNumber(100));
 	}
@@ -49,6 +61,9 @@ public class RenjinExampleResource {
 	@GET
 	@Path("model")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})	
+	 @ApiOperation(
+		        value = "Hello endpoint"
+		    )	
 	public RModel getRModel(){
 		return lm.getModel();
 	}
@@ -56,6 +71,9 @@ public class RenjinExampleResource {
 	@GET
 	@Path("model/predict")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})	
+	 @ApiOperation(
+		        value = "Hello endpoint"
+		    )	
 	public RPrediction passInSampleInput(@QueryParam("input") Double input) throws ScriptException{
 		return lm.getLMResult(Collections.singletonList(input));
 	}

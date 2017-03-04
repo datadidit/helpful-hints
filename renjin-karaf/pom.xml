@@ -28,10 +28,46 @@
 		</dependency>
 		-->
 		<dependency>
-			<groupId>datadidit.helpful.hints</groupId>
-			<artifactId>renjin-jetty</artifactId>
-			<version>${project.version}</version>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-xml-provider</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-csv</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
+			<version>3.1.7</version>
+        </dependency>		
+		<dependency>
+			<groupId>org.renjin</groupId>
+			<artifactId>renjin-script-engine</artifactId>
+			<version>${renjin.version}</version>
+			<classifier>jar-with-dependencies</classifier>					
+		</dependency>
+		<dependency>
+			<groupId>org.renjin</groupId>
+			<artifactId>renjin-asm</artifactId>
+			<version>5.0.4b</version>
+			<optional>true</optional>
+		</dependency>						
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

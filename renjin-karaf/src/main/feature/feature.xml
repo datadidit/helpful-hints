@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="renjin-karaf">
-	<repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.7/xml/features</repository>
+	<repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.9/xml/features</repository>
 	
 	<feature name="datadidit-renjin-karaf-deps" description="renjin-karaf" version="1.0.0-SNAPSHOT">
 		<bundle>wrap:mvn:com.jcraft/jsch/0.1.54</bundle>
@@ -14,8 +14,9 @@
 	</feature>
 	
 	<feature name="datadidit-rest-deps" descriprition="Rest dependencies" version="1.0.0-SNAPSHOT">
-		<feature version="3.1.7" prerequisite="true">cxf</feature>
-		<feature version="3.1.7" prerequisite="true">cxf-rs-security-cors</feature>	
+		<feature version="3.1.9" prerequisite="true">cxf</feature>		
+		<feature version="3.1.9" prerequisite="true">cxf-rs-security-cors</feature>
+		<feature version="3.1.9" prerequisite="true">cxf-rs-description-swagger2</feature>								
         <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.1</bundle>
         <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.8.1</bundle>		
         <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.8.1</bundle>		

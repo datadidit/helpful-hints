@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
 	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
 	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd 
 						http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
 						http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://cxf.apache.org/blueprint/core"
+       xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+
+       xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+                           http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+                           http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd">
 	<!-- Bring in Service -->
 	<reference id="lmRef" interface="datadidit.helpful.hints.renjin.RenjinLinearModel" availability="optional" />
+
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
+	<bean id="xmlProvider" class="com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider" />
+	<bean id="myProvider" class="datadidit.helpfulhints.provider.BeanProvider" />
+    <bean id="multipartProvider" class="org.apache.cxf.jaxrs.provider.MultipartProvider" />
+
+    <!-- CXF Swagger2Feature -->  
+    <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
+        <property name="basePath" value="/cxf/example"/>
+        <property name="usePathBasedConfig" value="true" />        
+    </bean>
+    
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging />
+        </cxf:features>
+    </cxf:bus>
 
 	<jaxrs:server id="renjinResource" address="/example">
 		<jaxrs:serviceBeans>
@@ -17,15 +44,19 @@
 			<entry key="xml" value="application/xml" />
 		</jaxrs:extensionMappings>
 		<jaxrs:providers>
-			<bean class="com.fasterxml.jackson.jaxrs.xml.JacksonJaxbXMLProvider" />
-			<bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
-			<bean class="datadidit.helpfulhints.provider.BeanProvider" />
+			<ref component-id="jsonProvider" />
+			<ref component-id="xmlProvider" />
+			<ref component-id="myProvider" />
+            <ref component-id="multipartProvider" />			
 			<bean class="org.apache.cxf.jaxrs.model.wadl.WadlGenerator">
 				<property name="singleResourceMultipleMethods" value="false" />
 				<property name="applicationTitle" value="Baseball Predictions Rest Resource" />
 			</bean>
 			<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter" />									
 		</jaxrs:providers>
+        <jaxrs:features>
+            <ref component-id="swagger2Feature" />
+        </jaxrs:features>		
 	</jaxrs:server>
 
 	<bean id="renjinLMResource" class="datadidit.helpful.hints.renjin.karaf.RenjinExampleResource">

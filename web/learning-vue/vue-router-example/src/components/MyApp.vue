@@ -50,12 +50,6 @@ export default {
 		'addModal' : Addmodal,
 		'customrow': Customrow
 	},
-	data: function(){
-			return {
-				items : this.initItems,
-				showModal: this.initShowModal
-			}
-	},
-	props: ['initItems', 'initShowModal']
+	props: ['items', 'showModal']
 }
 </script>

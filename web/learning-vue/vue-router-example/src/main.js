@@ -18,13 +18,16 @@ var myParent = new Vue({
 var myApp = new Vue({
 	el: '#myapp',
 	data: {
-		initShowModal: false,
-		initItems: [
-			{'name':'Marcus', 'age': 29},
-			{'name':'Joy', 'age':26},
-			{'name':'Malcolm', 'age':25},
-			{'name':'Hope', 'age':18}
-		]
+		items: [
+				{'name':'Marcus', 'age': 29},
+				{'name':'Joy', 'age':26},
+				{'name':'Malcolm', 'age':25},
+				{'name':'Hope', 'age':18}
+			],
+		showModal: false
+	},
+	components: {
+		'myapp' : MyApp
 	},
 	render: h => h(MyApp)
 })

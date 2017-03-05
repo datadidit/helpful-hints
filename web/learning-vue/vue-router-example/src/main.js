@@ -1,18 +1,25 @@
 import Vue from 'vue'
-//import App from './components/App.vue'
-import MyApp from './components/MyApp.vue'
-import MyParent from './components/Parent.vue'
+import App from './components/App.vue' //Default app with template
+import MyApp from './components/MyApp.vue' //My Application for playing with Vue Router 
+//import MyParent from './components/Parent.vue' //Simple App to figure out inheritance of Vue components
 
-/*var defaultApp = new Vue({
+var defaultApp = new Vue({
   el: '#sap',
   render: h => h(App)
+})
+
+/*
+var myParent = new Vue({
+	el: '#myParent',
+	render: h => h(MyParent)
 })
 */
 
 var myApp = new Vue({
 	el: '#myapp',
 	data: {
-		items: [
+		initShowModal: false,
+		initItems: [
 			{'name':'Marcus', 'age': 29},
 			{'name':'Joy', 'age':26},
 			{'name':'Malcolm', 'age':25},
@@ -23,7 +30,3 @@ var myApp = new Vue({
 })
 
 
-var myParent = new Vue({
-	el: '#myParent',
-	render: h => h(MyParent)
-})

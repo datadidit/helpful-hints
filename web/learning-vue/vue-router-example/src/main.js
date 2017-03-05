@@ -16,7 +16,7 @@ var myParent = new Vue({
 */
 
 var myApp = new Vue({
-	el: '#myapp',
+	el: '#test',
 	data: {
 		items: [
 				{'name':'Marcus', 'age': 29},
@@ -28,8 +28,8 @@ var myApp = new Vue({
 	},
 	components: {
 		'myapp' : MyApp
-	},
-	render: h => h(MyApp)
+	}
+//	render: h => h(MyApp) Only need render if you want to create a new vue instance
 })
 
 

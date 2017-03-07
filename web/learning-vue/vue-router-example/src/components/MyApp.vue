@@ -28,10 +28,7 @@
 		</div>
 		<div>
 			<h1>Dynamic Routing</h1>
-			<div v-on:showMoreInfo="showMoreInfo">
-			</div>
-			<!--<moreinfo v-on:show="showMoreInfo"></moreinfo>-->
-			<!--<router-view></router-view>-->
+      		<!--<router-view></router-view>-->			
 		</div>
 	</div>
 </template>
@@ -48,11 +45,6 @@ export default {
 		'customrow': Customrow,
 		'moreinfo' : MoreInfo
 	},
-	methods: {
-		showMoreInfo: function(){
-			console.log("Saw Show!!!!!")
-		}
-	},
-	props: ['items', 'showModal']
+	props: ['items', 'showModal'],
 }
 </script>

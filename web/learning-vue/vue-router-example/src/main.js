@@ -2,7 +2,11 @@ import Vue from 'vue'
 import App from './components/App.vue' //Default app with template
 import MyApp from './components/MyApp.vue' //My Application for playing with Vue Router 
 import VueRouter from 'vue-router'
-//import MyParent from './components/Parent.vue' //Simple App to figure out inheritance of Vue components
+import MoreInfo from './components/MoreInfo.vue'
+import MyParent from './components/Parent.vue' //Simple App to figure out inheritance of Vue components
+
+//https://forum-archive.vuejs.org/topic/3019/vue-router-with-webpack-components-build/4 Likely has answer
+//https://github.com/vuejs/vue-hackernews/
 
 Vue.use(VueRouter)
 
@@ -13,15 +17,30 @@ var defaultApp = new Vue({
   }
 })
 
-/*
+const Foo = { template: '<div>foo</div>' }
+const Bar = { template: '<div>bar</div>' }
+
+const myroutes = [
+  { path: '/foo', component: Foo },
+  { path: '/bar', component: Bar }
+]
+
+const myrouter = new VueRouter({
+	route : myroutes
+})
+
 var myParent = new Vue({
 	el: '#myParent',
-	render: h => h(MyParent)
+	components: {
+		'parent' : MyParent
+	},
+	myrouter
 })
-*/
+
+//myrouter.start(myParent, '#myParent')
 
 var myApp = new Vue({
-	el: '#myApp',
+	el: '#embedrouter',
 	data: {
 		items: [
 				{'name':'Marcus', 'age': 29},
@@ -33,39 +52,39 @@ var myApp = new Vue({
 	},
 	components: {
 		'myapp' : MyApp
-	}
+	},
+	myrouter
 //	render: h => h(MyApp) Only need render if you want to create a new vue instance
 })
 
 //Hello Vue Router stuff 
 // 1. Define route components.
 // These can be imported from other files
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
 const User = {template: '<div>User {{ $route.params.id }}</div>'}
-const Test = {template: '<div>More Info: {{ $route.params.name }}</div>'}
+
 // 2. Define some routes
 // Each route should map to a component. The "component" can
 // either be an actual component constructor created via
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
-const routes = [
+const example_routes = [
   { path: '/foo', component: Foo },
   { path: '/bar', component: Bar },
   { path: '/user/:id', component: User},
-  { path: '/moreinfo/:name', component: Test}
+  { path: '/moreinfo', component: MoreInfo}
 ]
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = new VueRouter({
-  routes // short for routes: routes
+  routes : example_routes // short for routes: routes
 })
 
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
 const routerApp = new Vue({
+  el: '#routerApp',
   router
-}).$mount('#routerApp')
+})

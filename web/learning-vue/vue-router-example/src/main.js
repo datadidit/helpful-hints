@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './components/App.vue' //Default app with template
 import MyApp from './components/MyApp.vue' //My Application for playing with Vue Router 
 import VueRouter from 'vue-router'
+import MoreInfo from './components/MoreInfo.vue'
 //import MyParent from './components/Parent.vue' //Simple App to figure out inheritance of Vue components
 
 Vue.use(VueRouter)
@@ -50,7 +51,8 @@ const Bar = { template: '<div>bar</div>' }
 // We'll talk about nested routes later.
 const routes = [
   { path: '/foo', component: Foo },
-  { path: '/bar', component: Bar }
+  { path: '/bar', component: Bar },
+  { path: '/moreinfo', component: MoreInfo}
 ]
 
 // 3. Create the router instance and pass the `routes` option

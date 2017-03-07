@@ -26,6 +26,10 @@
 				</customrow>
 			</table>
 		</div>
+		<div>
+			<h1>Embedded Route </h1>
+      		<router-view></router-view>			
+		</div>
 	</div>
 </template>
 
@@ -50,6 +54,6 @@ export default {
 		'addModal' : Addmodal,
 		'customrow': Customrow
 	},
-	props: ['items', 'showModal']
+	props: ['items', 'showModal'],
 }
 </script>

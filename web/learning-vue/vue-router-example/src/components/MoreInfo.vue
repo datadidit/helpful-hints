@@ -1,9 +1,9 @@
-<temple>
+<template>
 	<div>
-		<h1>Name: {{ name }}</h1>
-		<h1>Age: {{ age }}</h1>
+		<h1>Name: Marcus</h1>
+		<h1>Age: 29</h1>
 	</div>
-</temple>
+</template>
 
 <script>
 export default {

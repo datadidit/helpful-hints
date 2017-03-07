@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MoreInfo from './MoreInfo.vue'
+//import MoreInfo from './MoreInfo.vue'
 
 export default {
 	name: 'Customrow',
@@ -21,9 +21,6 @@ export default {
 			}
 		}
 	},
-	components:{
-		'moreinfo' : MoreInfo
-	},
 	props: ['item', 'items', 'index'],
 	computed: {
 		name: function(){
@@ -32,6 +29,10 @@ export default {
 		age: function(){
 			return this.item.age;
 		}
+	},
+	/*components:{
+		'moreinfo' : MoreInfo
 	}
+	*/
 }
 </script>

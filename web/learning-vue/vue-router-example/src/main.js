@@ -42,7 +42,8 @@ var myApp = new Vue({
 // These can be imported from other files
 const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
-
+const User = {template: '<div>User {{ $route.params.id }}</div>'}
+const Test = {template: '<div>More Info: {{ $route.params.name }}</div>'}
 // 2. Define some routes
 // Each route should map to a component. The "component" can
 // either be an actual component constructor created via
@@ -50,7 +51,9 @@ const Bar = { template: '<div>bar</div>' }
 // We'll talk about nested routes later.
 const routes = [
   { path: '/foo', component: Foo },
-  { path: '/bar', component: Bar }
+  { path: '/bar', component: Bar },
+  { path: '/user/:id', component: User},
+  { path: '/moreinfo/:name', component: Test}
 ]
 
 // 3. Create the router instance and pass the `routes` option

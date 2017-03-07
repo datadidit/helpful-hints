@@ -5,14 +5,15 @@
 </template>
 
 <script>
-import MoreInfo from './MoreInfo.vue'
-
 export default {
 	name: 'Customrow',
 	methods: {
 		moreInfo: function(){
 			console.log("Do vue-router stuff")
 			console.log(this.item)
+			console.log(this.name)
+			this.$emit('showMoreInfo')
+			console.log("Emitted Show")
 		},
 		deleteRow: function(){
 			console.log("Do a delete "+this.index)
@@ -20,9 +21,6 @@ export default {
 				this.items.splice(this.index, 1)
 			}
 		}
-	},
-	components:{
-		'moreinfo' : MoreInfo
 	},
 	props: ['item', 'items', 'index'],
 	computed: {

@@ -26,29 +26,32 @@
 				</customrow>
 			</table>
 		</div>
+		<div>
+			<h1>Dynamic Routing</h1>
+			<div v-on:showMoreInfo="showMoreInfo">
+			</div>
+			<!--<moreinfo v-on:show="showMoreInfo"></moreinfo>-->
+			<!--<router-view></router-view>-->
+		</div>
 	</div>
 </template>
 
 <script>
 import Addmodal from './Addmodal.vue'
 import Customrow from './Customrow.vue'
+import MoreInfo from './MoreInfo.vue'
 
-/*
-*TODO: Figure out how to pass down data from main.js.
-*Tried:
-data: function(){
-	return {
-		items : this.initItems,
-		showModal: this.initShowModal
-	}
-}
-props: ['initItems', 'initShowModal']
-*/
 export default {
 	name: 'myapp',
 	components: {
 		'addModal' : Addmodal,
-		'customrow': Customrow
+		'customrow': Customrow,
+		'moreinfo' : MoreInfo
+	},
+	methods: {
+		showMoreInfo: function(){
+			console.log("Saw Show!!!!!")
+		}
 	},
 	props: ['items', 'showModal']
 }

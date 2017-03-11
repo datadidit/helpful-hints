@@ -10,6 +10,36 @@ import MyParent from './components/Parent.vue' //Simple App to figure out inheri
 
 Vue.use(VueRouter)
 
+/*
+* What routes do you need?
+*/
+const routes = [
+	{path: '/', component: MyApp},
+	{path: '/moreInfo', component: MoreInfo, props: { name: 'world' }}
+]
+
+const router = new VueRouter({
+	routes
+})
+
+var app = new Vue({
+	el: '#app',
+	data: {
+		items: [
+				{'name':'Marcus', 'age': 29},
+				{'name':'Joy', 'age':26},
+				{'name':'Malcolm', 'age':25},
+				{'name':'Hope', 'age':18}
+			],
+		showModal: true
+	},
+	components: {
+		'myapp' : MyApp
+	},	
+	router
+})
+
+/*
 var defaultApp = new Vue({
   el: '#app',
   components: {
@@ -17,8 +47,8 @@ var defaultApp = new Vue({
   }
 })
 
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
+//const Foo = { template: '<div>foo</div>' }
+//const Bar = { template: '<div>bar</div>' }
 
 const myroutes = [
   { path: '/foo', component: Foo },
@@ -88,3 +118,4 @@ const routerApp = new Vue({
   el: '#routerApp',
   router
 })
+*/

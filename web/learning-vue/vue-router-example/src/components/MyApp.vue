@@ -1,8 +1,4 @@
 <template>
-	<!--
-	Tried binding the items as well: 
-		<div v-bind:items="items" v-bind:showModal="showModal" id="myapp">
-	-->
 	<div id="myapp">
 		<div id="modal">
 			<span>Interactive Table<button v-on:click="showModal = true">Add</button></span>
@@ -26,25 +22,36 @@
 				</customrow>
 			</table>
 		</div>
-		<div>
-			<h1>Dynamic Routing</h1>
-      		<!--<router-view></router-view>-->			
-		</div>
 	</div>
 </template>
 
 <script>
 import Addmodal from './Addmodal.vue'
 import Customrow from './Customrow.vue'
-import MoreInfo from './MoreInfo.vue'
+//import MoreInfo from './MoreInfo.vue'
 
 export default {
 	name: 'myapp',
+	data: function(){
+		return {
+			items: [
+				{'name':'Marcus', 'age': 29},
+				{'name':'Joy', 'age':26},
+				{'name':'Malcolm', 'age':25},
+				{'name':'Hope', 'age':18}
+			],
+			showModal: false
+		}
+	},
 	components: {
 		'addModal' : Addmodal,
 		'customrow': Customrow,
-		'moreinfo' : MoreInfo
-	},
-	props: ['items', 'showModal'],
+	}
 }
 </script>
+
+<style type="text/css">
+#modal {
+	text-align : left;
+}
+</style>

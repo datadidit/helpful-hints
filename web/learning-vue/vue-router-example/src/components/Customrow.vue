@@ -13,8 +13,8 @@ export default {
 			console.log("Do vue-router stuff")
 			console.log(this.item)
 			console.log(this.name)
-			//this.$emit('showMoreInfo')
-			//console.log("Emitted Show")
+			this.$emit('moreInfoItem', this.item)
+			this.$router.push("/moreInfo")
 		},
 		deleteRow: function(){
 			console.log("Do a delete "+this.index)
@@ -31,10 +31,6 @@ export default {
 		age: function(){
 			return this.item.age;
 		}
-	},
-	/*components:{
-		'moreinfo' : MoreInfo
 	}
-	*/
 }
 </script>

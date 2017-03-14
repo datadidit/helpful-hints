@@ -5,23 +5,38 @@
 	<title>vue-router-example</title>
 </head>
 <body>
-	<sap id="app"></sap>
-	<myapp id="myApp" v-bind:items="items" v-bind:showModal="showModal"></myapp>
-	<div id="routerApp">
+    <div id="app">
+    	<router-view></router-view>
+    </div>
+    <script src="/dist/build.js"></script>
+	<!--<sap id="app"></sap>-->
+	<!--
+		If you don't assign you component the id from Vue you need to pass down the prop with a 
+		bind
+	-->
+	<!--
+	<div id="embedrouter">
+		<myapp v-bind:items="items" v-bind:showModal="showModal"></myapp>
+	</div>
+	-->
+	<!--<div id="routerApp">
 		<h1>Vue Router Example</h1>
 		<p>
+	-->
 			<!-- use router-link component for navigation. -->
 			<!-- specify the link by passing the `to` prop. -->
 			<!-- <router-link> will be rendered as an `<a>` tag by default -->
-			<router-link to="/foo">Go to Foo</router-link>
+<!--			<router-link to="/foo">Go to Foo</router-link>
 			<router-link to="/bar">Go to Bar</router-link>
+			<router-link to="/user/marcus">Go To User</router-link>
 			<router-link to="/moreinfo">Go to MoreInfo</router-link>			
 		</p>
-		<!-- route outlet -->
-		<!-- component matched by the route will render here -->
 		<router-view></router-view>  		
 	</div>
-	<!--<div id="myParent"></div>-->
-	<script src="/dist/build.js"></script>
+	<div id="myParent">
+		<parent></parent>
+		<router-view></router-view>		
+	</div>
+	-->
 </body>
 </html>

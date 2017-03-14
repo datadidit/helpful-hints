@@ -1,8 +1,4 @@
 <template>
-	<!--
-	Tried binding the items as well: 
-		<div v-bind:items="items" v-bind:showModal="showModal" id="myapp">
-	-->
 	<div id="myapp">
 		<div id="modal">
 			<span>Interactive Table<button v-on:click="showModal = true">Add</button></span>
@@ -26,34 +22,36 @@
 				</customrow>
 			</table>
 		</div>
-		<div>
-			<h1>Embedded Route </h1>
-      		<router-view></router-view>			
-		</div>
 	</div>
 </template>
 
 <script>
 import Addmodal from './Addmodal.vue'
 import Customrow from './Customrow.vue'
+//import MoreInfo from './MoreInfo.vue'
 
-/*
-*TODO: Figure out how to pass down data from main.js.
-*Tried:
-data: function(){
-	return {
-		items : this.initItems,
-		showModal: this.initShowModal
-	}
-}
-props: ['initItems', 'initShowModal']
-*/
 export default {
 	name: 'myapp',
+	data: function(){
+		return {
+			items: [
+				{'name':'Marcus', 'age': 29},
+				{'name':'Joy', 'age':26},
+				{'name':'Malcolm', 'age':25},
+				{'name':'Hope', 'age':18}
+			],
+			showModal: false
+		}
+	},
 	components: {
 		'addModal' : Addmodal,
-		'customrow': Customrow
-	},
-	props: ['items', 'showModal'],
+		'customrow': Customrow,
+	}
 }
 </script>
+
+<style type="text/css">
+#modal {
+	text-align : left;
+}
+</style>

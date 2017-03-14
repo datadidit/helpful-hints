@@ -5,7 +5,7 @@
 </template>
 
 <script>
-//import MoreInfo from './MoreInfo.vue'
+import {EventBus} from './event-bus.js'
 
 export default {
 	name: 'Customrow',
@@ -13,6 +13,10 @@ export default {
 		moreInfo: function(){
 			console.log("Do vue-router stuff")
 			console.log(this.item)
+			console.log(this.name)
+			//this.$emit('moreInfoItem', this.item)
+			EventBus.$emit('moreInfoItem', this.item)
+			this.$router.push({path:"/moreInfo"})
 		},
 		deleteRow: function(){
 			console.log("Do a delete "+this.index)
@@ -29,10 +33,6 @@ export default {
 		age: function(){
 			return this.item.age;
 		}
-	},
-	/*components:{
-		'moreinfo' : MoreInfo
 	}
-	*/
 }
 </script>

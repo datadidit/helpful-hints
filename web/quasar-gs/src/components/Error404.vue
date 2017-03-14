@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  name: 'error404',
   data () {
     return {
       canGoBack: window.history.length > 1

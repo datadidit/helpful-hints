@@ -8,15 +8,29 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 
 import Vue from 'vue'
 import Quasar from 'quasar'
-import router from './router'
+import VueRouter from 'vue-router'
+import Index from 'components/Index.vue'
+import Error404 from 'components/Error404.vue'
 
 Vue.use(Quasar) // Install Quasar Framework
+Vue.use(VueRouter)
+
+const routes = [
+    { path: '/', component: Index }, // Default
+    { path: '*', component: Error404 } // Not found
+]
+
+const router = new VueRouter({
+	routes
+}) 
 
 Quasar.start(() => {
-  /* eslint-disable no-new */
   new Vue({
     el: '#q-app',
-    router,
-    render: h => h(require('./App'))
+    components: {
+    	'quasar-gs' : Index,
+    	'error404' : Error404
+    },
+    router
   })
 })

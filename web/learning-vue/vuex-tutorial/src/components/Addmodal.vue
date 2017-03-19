@@ -33,9 +33,10 @@ export default {
 			var newRow = new Object();
 			newRow.name = this.name;
 			newRow.age = this.age;
-			console.log(newRow)
-			console.log(this.items)
-			this.items.push(newRow)
+			//console.log(newRow)
+			//console.log(this.items)
+			//this.items.push(newRow) //TODO: This works too but should use a mutation 
+			this.$store.dispatch('addItem', newRow)
 			
 			this.$emit('close')
 		}

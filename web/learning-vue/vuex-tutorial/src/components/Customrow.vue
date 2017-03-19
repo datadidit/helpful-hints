@@ -10,19 +10,16 @@ export default {
 	name: 'Customrow',
 	methods: {
 		moreInfo: function(){
-			console.log("Do vue-router stuff")
-			console.log(this.item)
-			console.log(this.name)
-			console.log(this.age)			
-			this.$store.dispatch('updateMIName', this.name)
-			this.$store.dispatch('updateMIAge', this.age)
+			console.log("Do vue-router stuff")	
+			this.$store.dispatch('updateMoreInfo', this.item)
 			this.$router.push({path:"/tableExample/moreInfo"})
 		},
 		deleteRow: function(){
 			console.log("Do a delete "+this.index)
-			if(this.index > -1){
-				this.items.splice(this.index, 1)
-			}
+			//if(this.index > -1){
+			//	this.items.splice(this.index, 1)
+			//}
+			this.$store.dispatch('deleteItem', this.index)
 		}
 	},
 	props: ['item', 'items', 'index'],

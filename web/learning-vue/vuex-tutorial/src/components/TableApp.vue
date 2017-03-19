@@ -28,25 +28,23 @@
 <script>
 import Addmodal from './Addmodal.vue'
 import Customrow from './Customrow.vue'
+import { mapGetters, mapActions } from 'vuex'
 //import MoreInfo from './MoreInfo.vue'
 
 export default {
 	name: 'myapp',
 	data: function(){
 		return {
-			items: [
-				{'name':'Marcus', 'age': 29},
-				{'name':'Joy', 'age':26},
-				{'name':'Malcolm', 'age':25},
-				{'name':'Hope', 'age':18}
-			],
 			showModal: false
 		}
 	},
 	components: {
 		'addModal' : Addmodal,
 		'customrow': Customrow,
-	}
+	},
+	computed: mapGetters([
+		 'items'
+		])
 }
 </script>
 

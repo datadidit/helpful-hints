@@ -6,10 +6,17 @@ import * as mutations from './mutations'
 
 Vue.use(Vuex)
 
+//Contains the initial state
 const state = {
 	count: 0,
   moreInfoName: '',
-  moreInfoAge: ''
+  moreInfoAge: '',
+  items: [
+    {'name':'Marcus', 'age': 29},
+    {'name':'Joy', 'age':26},
+    {'name':'Malcolm', 'age':25},
+    {'name':'Hope', 'age':18}
+  ]  
 }
 
 const store = new Vuex.Store({

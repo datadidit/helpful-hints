@@ -7,11 +7,15 @@ export const decrement = state => {
 	state.count--
 }
 
-export const updateMIName = (state, name) => {
-	console.log("Making it here")
-	state.moreInfoName = name
+export const updateMoreInfo = (state, update) => {
+	state.moreInfoName = update.name
+	state.moreInfoAge = update.age
 }
 
-export const updateMIAge = (state, payload) => {
-	state.moreInfoAge = payload
+export const addItem = (state, item) => {
+	state.items.push(item)
+}
+
+export const deleteItem = (state, index) => {
+	state.items.splice(index, 1)
 }

@@ -10,6 +10,10 @@
 </template>
 
 <script>
+/*
+* MapGetters is a helper function to call the get method on count.
+* MapActions is helper function to dispatch(this.$store.dispatch('')) actions to a store. 
+*/
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

@@ -6,6 +6,7 @@ import MaterialGS1 from '@/components/MaterialGS1'
 import MaterialGS2 from '@/components/MaterialGS2'
 import Layout1 from '@/components/Layout1'
 import Lists from '@/components/Lists'
+import Table from '@/components/Table'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/listexample',
       name: 'list',
       component: Lists
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: Table
     }
   ]
 })

@@ -21,4 +21,8 @@ export default {
   margin-top: 60px;
 }
 */
+body {
+  height: 100%;
+  overflow: hidden;
+}
 </style>

@@ -7,6 +7,7 @@ import MaterialGS2 from '@/components/MaterialGS2'
 import Layout1 from '@/components/Layout1'
 import Lists from '@/components/Lists'
 import Table from '@/components/Table'
+import Scrollable from '@/components/ScrollableMaterial'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/table',
       name: 'table',
       component: Table
+    },
+    {
+      path: '/scrollable',
+      name: 'scroll',
+      component: Scrollable
     }
   ]
 })

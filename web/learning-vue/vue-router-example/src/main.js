@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 */
 const routes = [
 	{path: '/', component: MyApp},
-	{path: '/moreInfo', component: MoreInfo}
+	{path: '/moreInfo/:name', component: MoreInfo}
 ]
 
 const router = new VueRouter({

@@ -31,7 +31,7 @@ export default new Router({
       component: TableApp
     },
     {
-      path: '/tableExample/moreInfo',
+      path: '/tableExample/moreInfo/:name',
       name: 'Table_MoreInfo',
       component: MoreInfo
     }

@@ -12,7 +12,7 @@ export default {
 		moreInfo: function(){
 			console.log("Do vue-router stuff")	
 			this.$store.dispatch('updateMoreInfo', this.item)
-			this.$router.push({path:"/tableExample/moreInfo"})
+			this.$router.push({path:"/tableExample/moreInfo/"+this.name})
 		},
 		deleteRow: function(){
 			console.log("Do a delete "+this.index)

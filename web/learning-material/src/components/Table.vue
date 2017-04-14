@@ -1,4 +1,9 @@
 <template>
+<div>
+	<md-input-container>
+		<label>Filter</label>
+		<md-input v-model="filter"></md-input>
+	</md-input-container>
 	<md-table md-sort="name" @sort="onSort" @select="onSelect">
 		<md-table-header>
 			<md-table-row>
@@ -14,6 +19,7 @@
 			</md-table-row>
 		</md-table-body>
 	</md-table>
+</div>
 </template>
 
 <script>
@@ -23,12 +29,23 @@
 			return{
 				sortKey: '',
 				sortType: '',
+				filter: '',
 				items: [
 				{'name':'Marcus', 'age': 29},
 				{'name':'Joy', 'age':26},
 				{'name':'Malcolm', 'age':25},
 				{'name':'Hope', 'age':18}
 				] 
+			}
+		},
+		watch: {
+			filter() {
+				console.log('Data Entered '+this.filter)
+				if(this.filter){
+					console.log('Do filter')
+				}else{
+					console.log('Nothing to filter....')
+				}
 			}
 		},
 		methods: {

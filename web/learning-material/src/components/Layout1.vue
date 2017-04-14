@@ -1,30 +1,45 @@
 <template>
-<div>
-<!-- Simple Example Grid Layout -->
+<md-layout :md-gutter="40">
 <md-layout>
-   <!--Take up 33% of screen -->
-  <md-layout md-flex="20" md-align="center" class='left-pane'>
-  	<div>
-  		Hello<br/>
-  		md-flex=20<br/>
-  		md-align=center
-  	</div>
-  </md-layout>
-  <md-layout md-align="center" class='right-pane'>
-  	World
-  </md-layout>
+	<md-layout class="left-pane">
+		Hello 
+	</md-layout>
 </md-layout>
-<!-- TODO: Want A Gutter --> 
-<md-layout :md-gutter="8">
-	<md-layout md-align="center" class="gutter-left-pane">
-		<span>8</span>
+<md-layout>
+	<md-layout class="right-pane">
+		World
+	</md-layout>
+</md-layout>
+<md-layout>
+	<md-layout class="gutter-left-pane">
+		Foo
+	</md-layout>
+</md-layout>
+</md-layout>
+<!--
+<md-layout :md-gutter="40">
+	<md-layout>
+		<md-layout md-align="center" class='left-pane'>
+			<div>
+				Hello<br/>
+				md-flex=20<br/>
+				md-align=center
+			</div>
+		</md-layout>
+	</md-layout>
+	<md-layout>
+		<md-layout md-align="center" class="gutter-left-pane">
+			<span>8</span>
+		</md-layout>
 	</md-layout>
 
-	<md-layout md-align="center" class="gutter-right-pane">
-		Bar
+	<md-layout>
+		<md-layout class="gutter-right-pane">
+			<span>end</span>
+		</md-layout>
 	</md-layout>
 </md-layout>
-</div>
+-->
 </template>
 
 <script type="text/javascript">
@@ -34,19 +49,27 @@ export default{
 </script>
 
 <style>
+.fullLayout {
+	background: black;
+}
 .left-pane {
-	background-color: red;
+	background: red;
 	font-size: 2em;
 	min-height: 100px
 }
 .right-pane {
-	background-color: blue;
+	background: blue;
 	font-size: 2em;	
 }
 .gutter-left-pane {
-	background-color: yellow;
+	background: yellow;
 }
 .gutter-right-pane{
-	background-color: green;
+	background: green;
+}
+
+#box { 
+    display: flex;
+    margin: 0 0;
 }
 </style>

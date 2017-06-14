@@ -28,9 +28,9 @@
     	Route that takes in a CSV file and outputs JSON
      -->
     <route id="csv-to-json">
-    	<from uri="file:///Users/mkwyc_000/workspace/git/apache-camel/process-csv?delete=true" />
+    	<from uri="file:///workspace/git/docker-images/mongo-milb/data?delete=true" />
     	<process ref="csvToJson" />
-    	<to uri="file:///Users/mkwyc_000/workspace/git/apache-camel/process-complete" />
+    	<to uri="file:///workspace/git/docker-images/mongo-milb/data-complete" />
     </route>
     
     <!-- 
@@ -39,18 +39,19 @@
     <route id="handleJson">
     	<from uri="direct:handleJson" />
     	<log message="Got ${body}" />
-    	<to uri="mongodb:mongoBean?database=example&amp;collection=testCollection&amp;operation=insert" />
+    	<to uri="file:///workspace/git/docker-images/mongo-milb/data-json" />
     </route>
   </camelContext>
   
   <!-- 
   	Bean instantiation for Mongo Client
    -->
+  <!--
   <bean id="mongoBean" class="com.mongodb.Mongo">
   	<constructor-arg name="host" value="127.0.0.1" />
     <constructor-arg name="port" value="27017" />
   </bean>
-  
+  -->
   <!-- 
 	Bean instantiation of CSVToJson
    -->

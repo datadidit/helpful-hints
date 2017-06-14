@@ -80,15 +80,21 @@ public class CSVToJson implements Processor{
 		InputStream stream = arg0.getIn().getBody(InputStream.class);
 		List<Map<?, ?>> objects = readObjectsFromCsv(stream);
 	
-		for(Map<?,?> map : objects){
-			//Create JSON 
+		//Inefficient write whole files 
+		/*for(Map<?,?> map : objects){
 			final String json = writeAsJson(map);
 			producer.send(new Processor(){
 				public void process(Exchange outExchange){
 					outExchange.getIn().setBody(json);
 				}
 			});			
-		}
+		}*/
+		final String json = writeAsJson(objects);
+		producer.send(new Processor(){
+			public void process(Exchange outExchange){
+				outExchange.getIn().setBody(json);
+			}
+		});	
 		
 		//TODO:If you don't close the stream this processor will continue to try and process the exchange...
 		stream.close();

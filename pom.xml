@@ -8,15 +8,19 @@
 	<name>parent</name>
 	<url>http://maven.apache.org</url>
 	<modules>
+		<!--
 		<module>json-to-csv</module>
 		<module>jetty-jersey</module>
 		<module>camel-csv-json</module>
+		-->
 		<module>csv-provider</module>
+		<!--
 		<module>jetty-cxf</module>
 		<module>renjin-jetty</module>
 		<module>renjin-karaf</module>
     <module>nifi-csv-json-bundle</module>
     <module>jacorb-karaf</module>
+    -->
   </modules>
 	<properties>
 		<jetty.version>9.3.14.v20161028</jetty.version>

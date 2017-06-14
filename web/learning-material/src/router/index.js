@@ -8,6 +8,8 @@ import Layout1 from '@/components/Layout1'
 import Lists from '@/components/Lists'
 import Table from '@/components/Table'
 import Scrollable from '@/components/ScrollableMaterial'
+import BarChart from '@/components/BarChart'
+import RadarChart from '@/components/RadarChart'
 
 Vue.use(Router)
 
@@ -52,6 +54,16 @@ export default new Router({
       path: '/scrollable',
       name: 'scroll',
       component: Scrollable
+    },
+    {
+      path: '/barchart',
+      name: 'barchart',
+      component: BarChart
+    },
+    {
+      path: '/radarchart',
+      name: 'radarchart',
+      component: RadarChart
     }
   ]
 })

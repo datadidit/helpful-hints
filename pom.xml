@@ -23,9 +23,9 @@
 	</properties>
 	<distributionManagement>
 		<repository>
-			<id>bintray-datadidit-datadidit</id>
-			<name>datadidit-datadidit</name>
-			<url>https://api.bintray.com/maven/datadidit/datadidit/com.datadidit/;publish=1</url>
+			<id>bintray-datadidit</id>
+			<name>bintray-datadidit</name>
+			<url>https://api.bintray.com/maven/datadidit/datadidit/com.datadidit.helpful.hints/;publish=1</url>
 		</repository>
 	</distributionManagement>
 	<dependencyManagement>

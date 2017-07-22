@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>datadidit.helpful.hints</groupId>
+	<groupId>com.datadidit.helpful.hints</groupId>
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>parent</name>
 	<url>http://maven.apache.org</url>
 	<modules>
-		<!--
-		<module>json-to-csv</module>
-		<module>jetty-jersey</module>
-		<module>camel-csv-json</module>
-		-->
+		<!-- <module>json-to-csv</module> <module>jetty-jersey</module> <module>camel-csv-json</module> 
+			<module>jetty-cxf</module> <module>renjin-jetty</module> <module>renjin-karaf</module> 
+			<module>nifi-csv-json-bundle</module> <module>jacorb-karaf</module> -->
 		<module>csv-provider</module>
-		<!--
-		<module>jetty-cxf</module>
-		<module>renjin-jetty</module>
-		<module>renjin-karaf</module>
-    <module>nifi-csv-json-bundle</module>
-    <module>jacorb-karaf</module>
-    -->
-  </modules>
+	</modules>
 	<properties>
 		<jetty.version>9.3.14.v20161028</jetty.version>
 		<jersey1.version>1.19</jersey1.version>
@@ -29,6 +21,13 @@
 		<cxf.version>3.1.3</cxf.version>
 		<renjin.version>0.8.2280</renjin.version>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>bintray-datadidit-datadidit</id>
+			<name>datadidit-datadidit</name>
+			<url>https://api.bintray.com/maven/datadidit/datadidit/com.datadidit/;publish=1</url>
+		</repository>
+	</distributionManagement>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -50,7 +49,7 @@
 				<groupId>com.fasterxml.jackson.jaxrs</groupId>
 				<artifactId>jackson-jaxrs-yaml-provider</artifactId>
 				<version>2.8.1</version>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxrs</artifactId>

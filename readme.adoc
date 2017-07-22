@@ -1,5 +1,8 @@
-## Helpful Hints ##
+= Helpful Hints
 
+Restructuring the way I lay out my git repos This repo is Under Construction....
+
+////
 Project to hold useful code examples for later reference...
 
 * [jetty-jersey](jetty-jersey/readme.md): Simple REST example using Jersey 1.
@@ -9,3 +12,4 @@ Project to hold useful code examples for later reference...
 * [csv-provider](csv-provider/readme.md): Example of a REST Service that uses Jackson Providers and has a Custom Provider to make CSVs. 
 * [renjin-jetty](renjin-jetty/readme.md): Example of a webservice that uses both R and Java. 
 * [renjin-karaf](renjin-karaf/readme.md): Example of a combining renjin with an Karaf(OSGi container). 
+////
